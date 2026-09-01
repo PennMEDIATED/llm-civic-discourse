@@ -50,8 +50,16 @@
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-thumb { background: rgba(13,13,12,0.15); border-radius: 3px; }
 
-    /* Responsive layout */
-    .dashboard-container { max-width: 1280px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
+    /* Responsive layout — shared 1440px page cap / 80px side padding scale,
+       stepping down to 32px at 900px and 20px at 480px, matching the
+       about/home/grants-overview `--pad-x` convention. */
+    .dashboard-container { max-width: 1440px; margin: 0 auto; padding-left: var(--space-1000); padding-right: var(--space-1000); }
+    @media (max-width: 900px) {
+      .dashboard-container { padding-left: var(--space-400); padding-right: var(--space-400); }
+    }
+    @media (max-width: 480px) {
+      .dashboard-container { padding-left: var(--space-250); padding-right: var(--space-250); }
+    }
 
     .papers-list { display: flex; flex-direction: column; gap: var(--space-150); }
     .paper-row-top {
@@ -80,12 +88,14 @@
       .paper-row-preview{ grid-area: preview; }
     }
 
+    /* Stats-band pillar-group: 2-up grid collapses to 1 column, matching
+       grants-overview's .pillar-group breakpoint (never let a multi-column
+       grid just shrink its columns — reflow to fewer instead). */
+    @media (max-width: 900px) {
+      .header-flex { grid-template-columns: minmax(0, 1fr) !important; }
+    }
+
     @media (max-width: 768px) {
-      .dashboard-container { padding-left: 16px; padding-right: 16px; }
-      .header-inner { padding: 0 16px 24px !important; }
-      .page-hero-title { font-size: 1.6rem !important; }
-      .header-flex { flex-direction: column !important; }
-      .convening-block { flex: 1 1 100% !important; }
       .controls-row { flex-direction: column; }
     }
 
@@ -1122,41 +1132,53 @@
       filtered = applySort(filtered, sortOrder);
       return (
         <div style={{ minHeight: "100vh" }}>
-          {/* Header */}
-          <header style={{
-            borderBottom: "2px solid var(--c-dark)",
-            background: "var(--c-bg)",
-          }}>
-            <div className="dashboard-container header-inner" style={{ maxWidth: 1280, margin: "0 auto", paddingTop: 36, paddingBottom: 36 }}>
+          {/* Header — matches grants-overview's page-header: plain white
+              background, 80px top/bottom section rhythm, 48px accent-purple
+              serif h1, 20px/300/dark lede directly beneath it. */}
+          <header style={{ background: "var(--c-bg)" }}>
+            <div className="dashboard-container header-inner" style={{ maxWidth: 1440, margin: "0 auto", paddingTop: 80, paddingBottom: 80 }}>
               <h1 className="page-hero-title" style={{
                 fontFamily: "var(--f-serif)",
-                fontSize: "1.9rem",
-                fontWeight: 700,
-                lineHeight: 1.2,
-                margin: 0,
-                color: "var(--c-dark)",
-                maxWidth: 700,
+                fontSize: "clamp(32px, 4.2vw, 48px)",
+                fontWeight: 600,
+                lineHeight: 1.05,
+                margin: "0 0 20px",
+                color: "var(--c-accent)",
               }}>
                 LLMs and Civic Discourse
               </h1>
-              <div className="header-flex" style={{ display: "flex", alignItems: "stretch", gap: 32, marginTop: 14, flexWrap: "wrap" }}>
-                <p style={{
-                  fontFamily: "var(--f-sans)",
-                  fontSize: 17,
-                  color: "var(--c-gray-dark)",
-                  margin: 0,
-                  lineHeight: 1.7,
-                  fontWeight: 300,
-                  flex: "1 1 100%",
-                }}>
-                  Containing {papers.length} papers, this dashboard highlights recent research on how large language models (LLMs) shape civic discourse. The collection includes empirical studies examining political bias in LLM outputs, longitudinal audits tracking how LLMs handle political content over time, and experimental research testing how LLMs affect learning outcomes and political beliefs. It also features papers investigating trends in automated content moderation, including refusal patterns and potential speech suppression for different identity groups. Several papers explore whether and how LLMs might support democratic processes—from improving online political conversations to assisting with democratic deliberation. Together, these papers serve as a helpful primer for understanding current research on how LLMs are shaping political communication and civic participation.
-                </p>
-                <div className="convening-block" style={{ flex: "2 1 320px", display: "flex", flexDirection: "column", justifyContent: "space-between", gap: 10, background: "var(--c-light-bg)", border: "1px solid var(--c-border)", borderLeft: "4px solid var(--c-red)", borderRadius: 8, padding: "14px 18px" }}>
+              <p style={{
+                fontFamily: "var(--f-sans)",
+                fontSize: 20,
+                color: "var(--c-dark)",
+                margin: 0,
+                lineHeight: 1.5,
+                fontWeight: 300,
+              }}>
+                Containing {papers.length} papers, this dashboard highlights recent research on how large language models (LLMs) shape civic discourse. The collection includes empirical studies examining political bias in LLM outputs, longitudinal audits tracking how LLMs handle political content over time, and experimental research testing how LLMs affect learning outcomes and political beliefs. It also features papers investigating trends in automated content moderation, including refusal patterns and potential speech suppression for different identity groups. Several papers explore whether and how LLMs might support democratic processes—from improving online political conversations to assisting with democratic deliberation. Together, these papers serve as a helpful primer for understanding current research on how LLMs are shaping political communication and civic participation.
+              </p>
+            </div>
+          </header>
+
+          {/* Stats band — solid brand purple, matching grants-overview's
+              .stats-band (documented alternative to the two-tone gradient),
+              housing a 2-up pillar-box grid for the Center's related
+              programming instead of aggregate stats. */}
+          <div className="stats-band" style={{ background: "var(--c-accent)", padding: "80px 0 80px" }}>
+            <div className="dashboard-container" style={{ maxWidth: 1440, margin: "0 auto" }}>
+              <h2 style={{
+                fontFamily: "var(--f-sans)", fontSize: 40, fontWeight: 600, letterSpacing: "-0.02em",
+                lineHeight: 1.15, color: "var(--c-white)", margin: "0 0 24px",
+              }}>
+                Related Center Programming
+              </h2>
+              <div className="header-flex" style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 14 }}>
+                <div className="convening-block pillar-box" style={{ background: "var(--c-light-bg)", border: "1px solid rgba(255,255,255,0.16)", padding: "20px 22px", display: "flex", flexDirection: "column", gap: 10, minWidth: 0 }}>
                   <h3 style={{
-                    fontFamily: "var(--f-serif)",
-                    fontSize: 18,
-                    fontWeight: 700,
-                    color: "var(--c-dark)",
+                    fontFamily: "var(--f-sans)",
+                    fontSize: 16,
+                    fontWeight: 600,
+                    color: "var(--c-red)",
                     margin: 0,
                     lineHeight: 1.2,
                   }}>
@@ -1164,10 +1186,10 @@
                   </h3>
                   <p style={{
                     fontFamily: "var(--f-sans)",
-                    fontSize: 14,
-                    color: "var(--c-gray-dark)",
+                    fontSize: 14.5,
+                    color: "var(--c-dark)",
                     margin: 0,
-                    lineHeight: 1.55,
+                    lineHeight: 1.6,
                     fontWeight: 300,
                   }}>
                     On March 4th, Penn MEDIATED hosted an online convening of prominent academic researchers and civil society organizations to share results from, and approaches to, monitoring and evaluating LLM civic discourse—how LLMs discuss political topics, refer to politicians, and relate election information. You can see the topic primer for that convening below.
@@ -1176,6 +1198,7 @@
                     href="LLM Civic Discourse Convening - Topic Primer.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="cta-btn"
                     style={{
                       display: "inline-flex",
                       alignItems: "center",
@@ -1184,7 +1207,7 @@
                       padding: "8px 16px",
                       background: "var(--c-red)",
                       color: "var(--c-white)",
-                      borderRadius: 8,
+                      borderRadius: 0,
                       textDecoration: "none",
                       fontFamily: "var(--f-sans)",
                       fontSize: 13,
@@ -1201,12 +1224,12 @@
                     LLM Civic Discourse – Topic Primer
                   </a>
                 </div>
-                <div className="convening-block" style={{ flex: "3 1 480px", display: "flex", flexDirection: "column", justifyContent: "space-between", gap: 10, background: "var(--c-light-bg)", border: "1px solid var(--c-border)", borderLeft: "4px solid var(--c-red)", borderRadius: 8, padding: "14px 18px" }}>
+                <div className="convening-block pillar-box" style={{ background: "var(--c-light-bg)", border: "1px solid rgba(255,255,255,0.16)", padding: "20px 22px", display: "flex", flexDirection: "column", gap: 10, minWidth: 0 }}>
                   <h3 style={{
-                    fontFamily: "var(--f-serif)",
-                    fontSize: 18,
-                    fontWeight: 700,
-                    color: "var(--c-dark)",
+                    fontFamily: "var(--f-sans)",
+                    fontSize: 16,
+                    fontWeight: 600,
+                    color: "var(--c-red)",
                     margin: 0,
                     lineHeight: 1.2,
                   }}>
@@ -1214,10 +1237,10 @@
                   </h3>
                   <p style={{
                     fontFamily: "var(--f-sans)",
-                    fontSize: 14,
-                    color: "var(--c-gray-dark)",
+                    fontSize: 14.5,
+                    color: "var(--c-dark)",
                     margin: 0,
-                    lineHeight: 1.55,
+                    lineHeight: 1.6,
                     fontWeight: 300,
                   }}>
                     In 2026, Penn MEDIATED funded four grants to expand Penn's research on this essential topic:
@@ -1225,7 +1248,7 @@
                   <ul style={{
                     fontFamily: "var(--f-sans)",
                     fontSize: 13.5,
-                    color: "var(--c-gray-dark)",
+                    color: "var(--c-dark)",
                     fontWeight: 300,
                     lineHeight: 1.55,
                     paddingLeft: 18,
@@ -1243,6 +1266,7 @@
                     href="http://infodem.upenn.edu/grants"
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="cta-btn"
                     style={{
                       display: "inline-flex",
                       alignItems: "center",
@@ -1251,7 +1275,7 @@
                       padding: "8px 16px",
                       background: "var(--c-red)",
                       color: "var(--c-white)",
-                      borderRadius: 8,
+                      borderRadius: 0,
                       textDecoration: "none",
                       fontFamily: "var(--f-sans)",
                       fontSize: 13,
@@ -1270,25 +1294,32 @@
                 </div>
               </div>
             </div>
-          </header>
+          </div>
 
-          {/* Controls */}
-          <div style={{ background: "var(--c-bg)", borderBottom: "2px solid var(--c-border)" }}>
-          <div className="dashboard-container" style={{ maxWidth: 1280, margin: "0 auto", paddingTop: 18, paddingBottom: 14 }}>
-            <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center", paddingBottom: 12, marginBottom: 10, borderBottom: "1px solid var(--c-border)" }}>
+          {/* Controls — reskinned as grants-overview's .filter-row: a single
+              bordered, sharp-cornered box (light-bg fields, no rounded
+              corners) instead of a borderless row. Theme filtering keeps
+              this dashboard's richer multi-select toggle chips rather than
+              grants-overview's single <select>, but the chips themselves are
+              now sharp-cornered tags instead of rounded pills. */}
+          <div style={{ background: "var(--c-bg)" }}>
+          <div className="dashboard-container" style={{ maxWidth: 1440, margin: "0 auto", paddingTop: 48, paddingBottom: 14 }}>
+            <div className="filter-row" style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center", background: "var(--c-bg)", border: "1px solid var(--c-border)", padding: "14px 16px", marginBottom: 18 }}>
               <input
                 type="text"
                 placeholder="🔍  Search titles, authors, or content."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 style={{
+                  flex: "1 1 200px",
+                  minWidth: 160,
                   width: 260,
-                  padding: "7px 12px",
-                  borderRadius: 5,
-                  border: "1px solid rgba(13,13,12,0.2)",
-                  background: "var(--c-white)",
+                  padding: "9px 11px",
+                  borderRadius: 0,
+                  border: "1px solid var(--c-border)",
+                  background: "var(--c-light-bg)",
                   color: "var(--c-dark)",
-                  fontSize: 13,
+                  fontSize: 13.5,
                   fontFamily: "var(--f-sans)",
                   fontWeight: 400,
                   outline: "none",
@@ -1296,18 +1327,18 @@
                   transition: "border-color 0.2s",
                 }}
                 onFocus={(e) => e.target.style.borderColor = "var(--c-red)"}
-                onBlur={(e) => e.target.style.borderColor = "rgba(13,13,12,0.2)"}
+                onBlur={(e) => e.target.style.borderColor = "var(--c-border)"}
               />
               <select
                 value={sortOrder}
                 onChange={(e) => setSortOrder(e.target.value)}
                 style={{
-                  padding: "7px 28px 7px 11px",
-                  borderRadius: 5,
-                  border: "1px solid rgba(13,13,12,0.2)",
-                  background: "var(--c-white)",
+                  padding: "9px 28px 9px 11px",
+                  borderRadius: 0,
+                  border: "1px solid var(--c-border)",
+                  background: "var(--c-light-bg)",
                   color: "var(--c-dark)",
-                  fontSize: 13,
+                  fontSize: 13.5,
                   fontFamily: "var(--f-sans)",
                   cursor: "pointer",
                   outline: "none",
@@ -1323,7 +1354,28 @@
                   <option key={o.value} value={o.value}>{o.label}</option>
                 ))}
               </select>
-              <p style={{ fontSize: 12, color: "var(--c-gray)", margin: "0 0 0 auto", fontFamily: "var(--f-sans)", whiteSpace: "nowrap" }}>
+              {activeTags.length > 0 && (
+                <button
+                  className="clear"
+                  onClick={() => setActiveTags([])}
+                  style={{
+                    padding: "9px 14px",
+                    borderRadius: 0,
+                    border: "1px solid var(--c-border)",
+                    background: "transparent",
+                    color: "var(--c-gray-dark)",
+                    fontSize: 13,
+                    fontFamily: "var(--f-sans)",
+                    cursor: "pointer",
+                    transition: "color 0.15s, border-color 0.15s",
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.color = "var(--c-red)"; e.currentTarget.style.borderColor = "var(--c-red)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.color = "var(--c-gray-dark)"; e.currentTarget.style.borderColor = "var(--c-border)"; }}
+                >
+                  Clear filters
+                </button>
+              )}
+              <p className="result-count" style={{ fontSize: 12.5, color: "var(--c-gray)", margin: "0 0 0 auto", fontFamily: "var(--f-sans)", whiteSpace: "nowrap" }}>
                 Showing {filtered.length} of {papers.length} papers
               </p>
             </div>
@@ -1349,7 +1401,7 @@
                     onClick={() => toggleTag(tag)}
                     style={{
                       padding: "4px 13px",
-                      borderRadius: 20,
+                      borderRadius: 0,
                       border: "1.5px solid " + s.border,
                       background: active ? s.bg : "transparent",
                       color: s.text,
@@ -1368,33 +1420,13 @@
               })}
               </div>
             </div>
-            {activeTags.length > 0 && (
-              <div style={{ marginBottom: 0 }}>
-                <button
-                  onClick={() => setActiveTags([])}
-                  style={{
-                    padding: "4px 12px",
-                    borderRadius: 20,
-                    border: "none",
-                    background: "none",
-                    color: "var(--c-red)",
-                    fontSize: 12,
-                    fontFamily: "var(--f-sans)",
-                    fontWeight: 500,
-                    cursor: "pointer",
-                  }}
-                >
-                  Clear all &times;
-                </button>
-              </div>
-            )}
           </div>
           </div>
 
           {/* Papers, row by row */}
-          <div className="dashboard-container" style={{ maxWidth: 1280, margin: "0 auto", paddingTop: 24, paddingBottom: 60 }}>
+          <div className="dashboard-container" style={{ maxWidth: 1440, margin: "0 auto", paddingTop: 24, paddingBottom: 80 }}>
             {filtered.length === 0 && (
-              <div style={{ textAlign: "center", padding: "80px 20px", color: "var(--c-gray)", fontSize: 15, fontFamily: "var(--f-sans)", background: "var(--c-white)", border: "1px solid var(--c-border)", borderRadius: 8 }}>
+              <div className="empty-state" style={{ textAlign: "center", padding: "80px 20px", color: "var(--c-gray)", fontSize: 15, fontFamily: "var(--f-sans)", background: "var(--c-white)", border: "1px solid var(--c-border)", borderRadius: 0 }}>
                 <p style={{ fontSize: 32, marginBottom: 12 }}>&empty;</p>
                 No papers match your current filters.
               </div>
@@ -1411,15 +1443,17 @@
                   style={{
                     background: "var(--c-white)",
                     border: "1px solid " + (isPenn ? "#e8d98a" : "var(--c-border)"),
-                    borderRadius: 8,
+                    borderRadius: 0,
                     overflow: "hidden",
-                    transition: "box-shadow 0.2s",
+                    transition: "box-shadow 0.15s, transform 0.15s",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.boxShadow = "0 2px 16px rgba(13,13,12,.08)";
+                    e.currentTarget.style.boxShadow = "0 12px 24px rgba(13,13,12,.16)";
+                    e.currentTarget.style.transform = "translateY(-4px)";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.boxShadow = "none";
+                    e.currentTarget.style.transform = "translateY(0)";
                   }}
                 >
                   <div
@@ -1435,7 +1469,7 @@
                             fontFamily: "var(--f-sans)", fontSize: 9,
                             letterSpacing: "0.5px", textTransform: "uppercase", fontWeight: 700,
                             color: "#8a6a00", background: "#fef3c0", border: "1px solid #e8d98a",
-                            borderRadius: 4, padding: "3px 6px", whiteSpace: "nowrap",
+                            borderRadius: 0, padding: "3px 6px", whiteSpace: "nowrap",
                           }}>Penn</span>
                         )}
                         <h2 style={{ fontFamily: "var(--f-serif)", fontSize: 15, fontWeight: 600, lineHeight: 1.45, margin: 0 }}>
@@ -1456,7 +1490,7 @@
                         {paper.tags.filter(tag => tag !== "Penn Research").map((tag) => {
                           const s = getTagStyle(tag);
                           return (
-                            <span key={tag} style={{ padding: "2px 9px", borderRadius: 10, background: s.bg, color: s.text, fontSize: 10, fontWeight: 500, fontFamily: "var(--f-sans)", border: "1px solid " + s.border + "30", whiteSpace: "nowrap" }}>{tag}</span>
+                            <span key={tag} style={{ padding: "2px 9px", borderRadius: 0, background: s.bg, color: s.text, fontSize: 10, fontWeight: 500, fontFamily: "var(--f-sans)", border: "1px solid " + s.border + "30", whiteSpace: "nowrap" }}>{tag}</span>
                           );
                         })}
                       </div>
@@ -1497,7 +1531,7 @@
                           style={{
                             display: "inline-block", background: "var(--c-red)", color: "var(--c-white)",
                             fontFamily: "var(--f-sans)", fontSize: 13, fontWeight: 600,
-                            padding: "8px 20px", borderRadius: 5, textDecoration: "none", transition: "background 0.15s",
+                            padding: "8px 20px", borderRadius: 0, textDecoration: "none", transition: "background 0.15s",
                           }}
                           onMouseEnter={e => { e.currentTarget.style.background = "var(--c-red-dark)"; }}
                           onMouseLeave={e => { e.currentTarget.style.background = "var(--c-red)"; }}
