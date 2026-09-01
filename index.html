@@ -32,6 +32,7 @@
 
       --f-serif: 'EB Garamond', Georgia, 'Times New Roman', serif;
       --f-sans:  'DM Sans', system-ui, -apple-system, sans-serif;
+      --f-mono:  'Courier New', Courier, monospace;
     }
 
     body {
@@ -1160,142 +1161,6 @@
             </div>
           </header>
 
-          {/* Stats band — solid brand purple, matching grants-overview's
-              .stats-band (documented alternative to the two-tone gradient),
-              housing a 2-up pillar-box grid for the Center's related
-              programming instead of aggregate stats. */}
-          <div className="stats-band" style={{ background: "var(--c-accent)", padding: "80px 0 80px" }}>
-            <div className="dashboard-container" style={{ maxWidth: 1440, margin: "0 auto" }}>
-              <h2 style={{
-                fontFamily: "var(--f-sans)", fontSize: 40, fontWeight: 600, letterSpacing: "-0.02em",
-                lineHeight: 1.15, color: "var(--c-white)", margin: "0 0 24px",
-              }}>
-                Related Center Programming
-              </h2>
-              <div className="header-flex" style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 14 }}>
-                <div className="convening-block pillar-box" style={{ background: "var(--c-light-bg)", border: "1px solid rgba(255,255,255,0.16)", padding: "20px 22px", display: "flex", flexDirection: "column", gap: 10, minWidth: 0 }}>
-                  <h3 style={{
-                    fontFamily: "var(--f-sans)",
-                    fontSize: 16,
-                    fontWeight: 600,
-                    color: "var(--c-red)",
-                    margin: 0,
-                    lineHeight: 1.2,
-                  }}>
-                    Convening on LLMs and Civic Discourse
-                  </h3>
-                  <p style={{
-                    fontFamily: "var(--f-sans)",
-                    fontSize: 14.5,
-                    color: "var(--c-dark)",
-                    margin: 0,
-                    lineHeight: 1.6,
-                    fontWeight: 300,
-                  }}>
-                    On March 4th, Penn MEDIATED hosted an online convening of prominent academic researchers and civil society organizations to share results from, and approaches to, monitoring and evaluating LLM civic discourse—how LLMs discuss political topics, refer to politicians, and relate election information. You can see the topic primer for that convening below.
-                  </p>
-                  <a
-                    href="LLM Civic Discourse Convening - Topic Primer.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="cta-btn"
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: 10,
-                      alignSelf: "flex-start",
-                      padding: "8px 16px",
-                      background: "var(--c-red)",
-                      color: "var(--c-white)",
-                      borderRadius: 0,
-                      textDecoration: "none",
-                      fontFamily: "var(--f-sans)",
-                      fontSize: 13,
-                      fontWeight: 500,
-                      lineHeight: 1.4,
-                      transition: "background 0.2s",
-                    }}
-                    onMouseEnter={e => { e.currentTarget.style.background = "var(--c-red-dark)"; }}
-                    onMouseLeave={e => { e.currentTarget.style.background = "var(--c-red)"; }}
-                  >
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
-                    </svg>
-                    LLM Civic Discourse – Topic Primer
-                  </a>
-                </div>
-                <div className="convening-block pillar-box" style={{ background: "var(--c-light-bg)", border: "1px solid rgba(255,255,255,0.16)", padding: "20px 22px", display: "flex", flexDirection: "column", gap: 10, minWidth: 0 }}>
-                  <h3 style={{
-                    fontFamily: "var(--f-sans)",
-                    fontSize: 16,
-                    fontWeight: 600,
-                    color: "var(--c-red)",
-                    margin: 0,
-                    lineHeight: 1.2,
-                  }}>
-                    Research Grants on LLM Civic Discourse
-                  </h3>
-                  <p style={{
-                    fontFamily: "var(--f-sans)",
-                    fontSize: 14.5,
-                    color: "var(--c-dark)",
-                    margin: 0,
-                    lineHeight: 1.6,
-                    fontWeight: 300,
-                  }}>
-                    In 2026, Penn MEDIATED funded four grants to expand Penn's research on this essential topic:
-                  </p>
-                  <ul style={{
-                    fontFamily: "var(--f-sans)",
-                    fontSize: 13.5,
-                    color: "var(--c-dark)",
-                    fontWeight: 300,
-                    lineHeight: 1.55,
-                    paddingLeft: 18,
-                    margin: 0,
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 6,
-                  }}>
-                    <li>AI Watchman: Longitudinally Auditing Generative AI Content Moderation of Social Issues</li>
-                    <li>Adversarial Testing of Misalignment in Frontier LLMs: When Asked to Create Anti-Democratic Campaign Materials</li>
-                    <li>Information Density and Narrative Persuasion in AI Chatbots: Cross-National Evidence from India and the United States</li>
-                    <li>How AI Transforms News: Measuring Bias and Distortion During LLM Conversations</li>
-                  </ul>
-                  <a
-                    href="http://infodem.upenn.edu/grants"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="cta-btn"
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: 10,
-                      alignSelf: "flex-start",
-                      padding: "8px 16px",
-                      background: "var(--c-red)",
-                      color: "var(--c-white)",
-                      borderRadius: 0,
-                      textDecoration: "none",
-                      fontFamily: "var(--f-sans)",
-                      fontSize: 13,
-                      fontWeight: 500,
-                      lineHeight: 1.4,
-                      transition: "background 0.2s",
-                    }}
-                    onMouseEnter={e => { e.currentTarget.style.background = "var(--c-red-dark)"; }}
-                    onMouseLeave={e => { e.currentTarget.style.background = "var(--c-red)"; }}
-                  >
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
-                    </svg>
-                    Penn MEDIATED Research Grants
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
           {/* Controls — reskinned as grants-overview's .filter-row: a single
               bordered, sharp-cornered box (light-bg fields, no rounded
               corners) instead of a borderless row. Theme filtering keeps
@@ -1305,30 +1170,33 @@
           <div style={{ background: "var(--c-bg)" }}>
           <div className="dashboard-container" style={{ maxWidth: 1440, margin: "0 auto", paddingTop: 48, paddingBottom: 14 }}>
             <div className="filter-row" style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center", background: "var(--c-bg)", border: "1px solid var(--c-border)", padding: "14px 16px", marginBottom: 18 }}>
-              <input
-                type="text"
-                placeholder="🔍  Search titles, authors, or content."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                style={{
-                  flex: "1 1 200px",
-                  minWidth: 160,
-                  width: 260,
-                  padding: "9px 11px",
-                  borderRadius: 0,
-                  border: "1px solid var(--c-border)",
-                  background: "var(--c-light-bg)",
-                  color: "var(--c-dark)",
-                  fontSize: 13.5,
-                  fontFamily: "var(--f-sans)",
-                  fontWeight: 400,
-                  outline: "none",
-                  boxSizing: "border-box",
-                  transition: "border-color 0.2s",
-                }}
-                onFocus={(e) => e.target.style.borderColor = "var(--c-red)"}
-                onBlur={(e) => e.target.style.borderColor = "var(--c-border)"}
-              />
+              <div style={{ position: "relative", flex: "1 1 200px", minWidth: 160, width: 260 }}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--c-gray)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ position: "absolute", left: 11, top: "50%", transform: "translateY(-50%)", pointerEvents: "none" }}>
+                  <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                <input
+                  type="text"
+                  placeholder="Search titles, authors, or content."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  style={{
+                    width: "100%",
+                    padding: "9px 11px 9px 32px",
+                    borderRadius: 0,
+                    border: "1px solid var(--c-border)",
+                    background: "var(--c-light-bg)",
+                    color: "var(--c-dark)",
+                    fontSize: 14,
+                    fontFamily: "var(--f-sans)",
+                    fontWeight: 400,
+                    outline: "none",
+                    boxSizing: "border-box",
+                    transition: "border-color 0.2s",
+                  }}
+                  onFocus={(e) => e.target.style.borderColor = "var(--c-red)"}
+                  onBlur={(e) => e.target.style.borderColor = "var(--c-border)"}
+                />
+              </div>
               <select
                 value={sortOrder}
                 onChange={(e) => setSortOrder(e.target.value)}
@@ -1338,7 +1206,7 @@
                   border: "1px solid var(--c-border)",
                   background: "var(--c-light-bg)",
                   color: "var(--c-dark)",
-                  fontSize: 13.5,
+                  fontSize: 14,
                   fontFamily: "var(--f-sans)",
                   cursor: "pointer",
                   outline: "none",
@@ -1375,7 +1243,7 @@
                   Clear filters
                 </button>
               )}
-              <p className="result-count" style={{ fontSize: 12.5, color: "var(--c-dark)", margin: "0 0 0 auto", fontFamily: "var(--f-sans)", whiteSpace: "nowrap" }}>
+              <p className="result-count" style={{ fontSize: 12, color: "var(--c-dark)", margin: "0 0 0 auto", fontFamily: "var(--f-sans)", whiteSpace: "nowrap" }}>
                 Showing {filtered.length} of {papers.length} papers
               </p>
             </div>
@@ -1383,7 +1251,7 @@
             {/* Tag filters */}
             <div style={{ display: "grid", gridTemplateColumns: "auto 1fr", alignItems: "start", columnGap: 9, marginBottom: 8 }}>
               <span style={{
-                fontFamily: "var(--f-sans)",
+                fontFamily: "var(--f-mono)",
                 fontSize: 11, fontWeight: 700, textTransform: "uppercase",
                 letterSpacing: "0.8px", color: "var(--c-dark)", whiteSpace: "nowrap", paddingTop: 4,
               }}>Themes</span>
@@ -1466,7 +1334,7 @@
                         {isPenn && (
                           <span style={{
                             flexShrink: 0, marginTop: 2,
-                            fontFamily: "var(--f-sans)", fontSize: 9,
+                            fontFamily: "var(--f-mono)", fontSize: 11,
                             letterSpacing: "0.5px", textTransform: "uppercase", fontWeight: 700,
                             color: "#8a6a00", background: "#fef3c0", border: "1px solid #e8d98a",
                             borderRadius: 0, padding: "3px 6px", whiteSpace: "nowrap",
@@ -1479,18 +1347,18 @@
                               target="_blank"
                               rel="noopener noreferrer"
                               onClick={e => e.stopPropagation()}
-                              style={{ display: "block", color: "var(--c-red)", textDecoration: "none" }}
+                              style={{ display: "block", color: "var(--c-dark)", textDecoration: "none" }}
                               onMouseEnter={e => { e.currentTarget.style.textDecoration = "underline"; }}
                               onMouseLeave={e => { e.currentTarget.style.textDecoration = "none"; }}
                             >{paper.title}</a>
-                          ) : <span style={{ display: "block", color: "var(--c-red)" }}>{paper.title}</span>}
+                          ) : <span style={{ display: "block", color: "var(--c-dark)" }}>{paper.title}</span>}
                         </h2>
                       </div>
                       <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
                         {paper.tags.filter(tag => tag !== "Penn Research").map((tag) => {
                           const s = getTagStyle(tag);
                           return (
-                            <span key={tag} style={{ padding: "2px 9px", borderRadius: 0, background: s.bg, color: s.text, fontSize: 10, fontWeight: 500, fontFamily: "var(--f-sans)", border: "1px solid " + s.border + "30", whiteSpace: "nowrap" }}>{tag}</span>
+                            <span key={tag} style={{ padding: "2px 9px", borderRadius: 0, background: s.bg, color: s.text, fontSize: 11, fontWeight: 500, fontFamily: "var(--f-sans)", border: "1px solid " + s.border + "30", whiteSpace: "nowrap" }}>{tag}</span>
                           );
                         })}
                       </div>
@@ -1498,7 +1366,7 @@
 
                     <div className="paper-row-authors" style={{ fontFamily: "var(--f-sans)", fontSize: 13, color: "var(--c-dark)", lineHeight: 1.5, paddingTop: 2 }}>
                       {paper.authors}
-                      <div style={{ marginTop: 4, fontSize: 11, textTransform: "uppercase", letterSpacing: "0.5px", color: "var(--c-dark)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{paper.journal}</div>
+                      <div style={{ marginTop: 4, fontFamily: "var(--f-mono)", fontSize: 11, textTransform: "uppercase", letterSpacing: "0.5px", color: "var(--c-dark)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{paper.journal}</div>
                     </div>
 
                     <div className="paper-row-year" style={{ fontFamily: "var(--f-sans)", fontSize: 13, color: "var(--c-dark)", paddingTop: 2 }}>{paper.year}</div>
@@ -1542,6 +1410,143 @@
                 </div>
               );
             })}
+            </div>
+          </div>
+
+          {/* Stats band — solid brand purple, matching grants-overview's
+              .stats-band (documented alternative to the two-tone gradient),
+              housing a 2-up pillar-box grid for the Center's related
+              programming instead of aggregate stats. Placed below the paper
+              list so the research content leads the page. */}
+          <div className="stats-band" style={{ background: "var(--c-accent)", padding: "80px 0 80px" }}>
+            <div className="dashboard-container" style={{ maxWidth: 1440, margin: "0 auto" }}>
+              <h2 style={{
+                fontFamily: "var(--f-sans)", fontSize: 40, fontWeight: 600, letterSpacing: "-0.02em",
+                lineHeight: 1.15, color: "var(--c-white)", margin: "0 0 24px",
+              }}>
+                Related Center Programming
+              </h2>
+              <div className="header-flex" style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 14 }}>
+                <div className="convening-block pillar-box" style={{ background: "var(--c-light-bg)", border: "1px solid rgba(255,255,255,0.16)", padding: "20px 22px", display: "flex", flexDirection: "column", gap: 10, minWidth: 0 }}>
+                  <h3 style={{
+                    fontFamily: "var(--f-sans)",
+                    fontSize: 16,
+                    fontWeight: 600,
+                    color: "var(--c-red)",
+                    margin: 0,
+                    lineHeight: 1.2,
+                  }}>
+                    Convening on LLMs and Civic Discourse
+                  </h3>
+                  <p style={{
+                    fontFamily: "var(--f-sans)",
+                    fontSize: 14,
+                    color: "var(--c-dark)",
+                    margin: 0,
+                    lineHeight: 1.6,
+                    fontWeight: 300,
+                  }}>
+                    On March 4th, Penn MEDIATED hosted an online convening of prominent academic researchers and civil society organizations to share results from, and approaches to, monitoring and evaluating LLM civic discourse—how LLMs discuss political topics, refer to politicians, and relate election information. You can see the topic primer for that convening below.
+                  </p>
+                  <a
+                    href="LLM Civic Discourse Convening - Topic Primer.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cta-btn"
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 10,
+                      alignSelf: "flex-start",
+                      padding: "8px 16px",
+                      background: "var(--c-red)",
+                      color: "var(--c-white)",
+                      borderRadius: 0,
+                      textDecoration: "none",
+                      fontFamily: "var(--f-sans)",
+                      fontSize: 13,
+                      fontWeight: 500,
+                      lineHeight: 1.4,
+                      transition: "background 0.2s",
+                    }}
+                    onMouseEnter={e => { e.currentTarget.style.background = "var(--c-red-dark)"; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = "var(--c-red)"; }}
+                  >
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+                    </svg>
+                    LLM Civic Discourse – Topic Primer
+                  </a>
+                </div>
+                <div className="convening-block pillar-box" style={{ background: "var(--c-light-bg)", border: "1px solid rgba(255,255,255,0.16)", padding: "20px 22px", display: "flex", flexDirection: "column", gap: 10, minWidth: 0 }}>
+                  <h3 style={{
+                    fontFamily: "var(--f-sans)",
+                    fontSize: 16,
+                    fontWeight: 600,
+                    color: "var(--c-red)",
+                    margin: 0,
+                    lineHeight: 1.2,
+                  }}>
+                    Research Grants on LLM Civic Discourse
+                  </h3>
+                  <p style={{
+                    fontFamily: "var(--f-sans)",
+                    fontSize: 14,
+                    color: "var(--c-dark)",
+                    margin: 0,
+                    lineHeight: 1.6,
+                    fontWeight: 300,
+                  }}>
+                    In 2026, Penn MEDIATED funded four grants to expand Penn's research on this essential topic:
+                  </p>
+                  <ul style={{
+                    fontFamily: "var(--f-sans)",
+                    fontSize: 14,
+                    color: "var(--c-dark)",
+                    fontWeight: 300,
+                    lineHeight: 1.55,
+                    paddingLeft: 18,
+                    margin: 0,
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 6,
+                  }}>
+                    <li>AI Watchman: Longitudinally Auditing Generative AI Content Moderation of Social Issues</li>
+                    <li>Adversarial Testing of Misalignment in Frontier LLMs: When Asked to Create Anti-Democratic Campaign Materials</li>
+                    <li>Information Density and Narrative Persuasion in AI Chatbots: Cross-National Evidence from India and the United States</li>
+                    <li>How AI Transforms News: Measuring Bias and Distortion During LLM Conversations</li>
+                  </ul>
+                  <a
+                    href="http://infodem.upenn.edu/grants"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cta-btn"
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 10,
+                      alignSelf: "flex-start",
+                      padding: "8px 16px",
+                      background: "var(--c-red)",
+                      color: "var(--c-white)",
+                      borderRadius: 0,
+                      textDecoration: "none",
+                      fontFamily: "var(--f-sans)",
+                      fontSize: 13,
+                      fontWeight: 500,
+                      lineHeight: 1.4,
+                      transition: "background 0.2s",
+                    }}
+                    onMouseEnter={e => { e.currentTarget.style.background = "var(--c-red-dark)"; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = "var(--c-red)"; }}
+                  >
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                    Penn MEDIATED Research Grants
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
