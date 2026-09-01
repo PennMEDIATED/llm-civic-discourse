@@ -7,28 +7,78 @@
   <meta name="description" content="This dashboard highlights recent research on how large language models (LLMs) shape civic discourse. The collection includes empirical studies examining political bias in LLM outputs, longitudinal audits tracking how LLMs handle political content over time, and experimental research testing how LLMs affect learning outcomes and political beliefs. It also features papers investigating trends in automated content moderation, including refusal patterns and potential speech suppression for different identity groups. Several papers explore whether and how LLMs might support democratic processes—from improving online political conversations to assisting with democratic deliberation. Together, these papers serve as a helpful primer for understanding current research on how LLMs are shaping political communication and civic participation."/>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* Design tokens — shared with the home/about repos */
+    :root {
+      --space-025: 2px;  --space-100: 8px;  --space-300: 24px; --space-600: 48px;
+      --space-050: 4px;  --space-150: 12px; --space-400: 32px; --space-800: 64px;
+      --space-075: 6px;  --space-200: 16px; --space-500: 40px; --space-1000: 80px;
+      --space-250: 20px;
+
+      --c-bg:        #ffffff;
+      --c-dark:      #0d0d0c;
+      --c-light-bg:  #f8f7f4;
+      --c-accent:    #5533ee;
+      --c-red:       #f03d1f;
+      --c-red-dark:  #d5341a;
+      --c-gray:      #888680;
+      --c-gray-dark: #54534f;
+      --c-muted:     #c8c6c0;
+      --c-white:     #ffffff;
+      --c-border:    rgba(13,13,12,0.1);
+
+      --f-serif: 'EB Garamond', Georgia, 'Times New Roman', serif;
+      --f-sans:  'DM Sans', system-ui, -apple-system, sans-serif;
+    }
+
     body {
-      font-family: 'EB Garamond', Georgia, 'Times New Roman', serif;
-      background: #f4f5f8;
-      color: #1a1a2e;
+      font-family: var(--f-serif);
+      background: var(--c-bg);
+      color: var(--c-dark);
       -webkit-font-smoothing: antialiased;
     }
     @keyframes fadeSlideIn {
       from { opacity: 0; transform: translateY(12px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    .paper-card { animation: fadeSlideIn 0.3s ease forwards; }
-    select option { background: #fff; color: #1a1a2e; }
-    ::placeholder { color: #707070; }
+    .paper-row { animation: fadeSlideIn 0.3s ease forwards; }
+    select option { background: var(--c-white); color: var(--c-dark); }
+    ::placeholder { color: var(--c-gray); }
     ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb { background: rgba(13,13,12,0.15); border-radius: 3px; }
 
     /* Responsive layout */
     .dashboard-container { max-width: 1280px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
-    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; }
+
+    .papers-list { display: flex; flex-direction: column; gap: var(--space-150); }
+    .paper-row-top {
+      display: grid;
+      grid-template-columns: 2fr 200px 64px 2.4fr;
+      gap: var(--space-300);
+      align-items: start;
+    }
+    /* Grid/flex children default to min-width:auto, which lets long
+       unbroken text (titles, journal names) push past the card edge
+       instead of wrapping — force every descendant to actually shrink. */
+    .paper-row-top, .paper-row-top * { min-width: 0; }
+
+    @media (max-width: 900px) {
+      .paper-row-top {
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+          "title  title"
+          "authors year"
+          "preview preview";
+        gap: var(--space-100) var(--space-200);
+      }
+      .paper-row-title  { grid-area: title; }
+      .paper-row-authors{ grid-area: authors; }
+      .paper-row-year   { grid-area: year; }
+      .paper-row-preview{ grid-area: preview; }
+    }
 
     @media (max-width: 768px) {
       .dashboard-container { padding-left: 16px; padding-right: 16px; }
@@ -36,8 +86,11 @@
       .page-hero-title { font-size: 1.6rem !important; }
       .header-flex { flex-direction: column !important; }
       .convening-block { flex: 1 1 100% !important; }
-      .cards-grid { grid-template-columns: 1fr; }
       .controls-row { flex-direction: column; }
+    }
+
+    @media (max-width: 600px) {
+      .paper-row-top { grid-template-columns: 1fr; grid-template-areas: "title" "authors" "year" "preview"; }
     }
   </style>
 </head>
@@ -995,13 +1048,13 @@
     ];
 
     const TAG_COLORS = {
-      "Content Moderation":               { bg: "#fdf0f6", border: "#a02d6b", text: "#7a2050" },
-      "Misinformation & Fact-Checking":   { bg: "#fdf0f0", border: "#b83a3a", text: "#922a2a" },
-      "Political Bias & Ideology":        { bg: "#f0eef8", border: "#5a3ea0", text: "#4a2e88" },
-      "Persuasion & Political Influence": { bg: "#fdf7e8", border: "#b08020", text: "#8a6010" },
-      "Democracy & Public Deliberation":  { bg: "#eef2f8", border: "#3a68aa", text: "#2a5088" },
-      "User Behavior & Information Effects": { bg: "#eef7f5", border: "#2a8a7a", text: "#1e6e62" },
-      "Benchmarks & Evaluation":          { bg: "#f2f5ee", border: "#4a7a2e", text: "#3a6020" },
+      "Content Moderation":               { bg: "#fde7f5", border: "#FF26AE", text: "#74114f" },
+      "Misinformation & Fact-Checking":   { bg: "#fdebe7", border: "#FF4825", text: "#742111" },
+      "Political Bias & Ideology":        { bg: "#ebe7fd", border: "#5A36FF", text: "#221174" },
+      "Persuasion & Political Influence": { bg: "#fdf8e7", border: "#FFCF26", text: "#745e11" },
+      "Democracy & Public Deliberation":  { bg: "#e7f7fd", border: "#26C5FF", text: "#115974" },
+      "User Behavior & Information Effects": { bg: "#e7fdf5", border: "#26FFAD", text: "#11744e" },
+      "Benchmarks & Evaluation":          { bg: "#effde7", border: "#6EFF26", text: "#327411" },
       "Penn Research":                    { bg: "#fef3c0", border: "#e8d98a", text: "#8a6a00" },
     };
 
@@ -1071,35 +1124,26 @@
         <div style={{ minHeight: "100vh" }}>
           {/* Header */}
           <header style={{
-            borderBottom: "2px solid #011F5B",
-            background: "#fff",
+            borderBottom: "2px solid var(--c-dark)",
+            background: "var(--c-bg)",
           }}>
-            <div className="dashboard-container header-inner" style={{ maxWidth: 1280, margin: "0 auto", paddingTop: 0, paddingBottom: 36 }}>
-              <p style={{
-                fontFamily: "'Roboto', 'Helvetica Neue', Arial, sans-serif",
-                fontSize: 12,
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                color: "#990000",
-                marginBottom: 12,
-                fontWeight: 700,
-              }}>Research</p>
+            <div className="dashboard-container header-inner" style={{ maxWidth: 1280, margin: "0 auto", paddingTop: 36, paddingBottom: 36 }}>
               <h1 className="page-hero-title" style={{
-                fontFamily: "'EB Garamond', Georgia, 'Times New Roman', serif",
+                fontFamily: "var(--f-serif)",
                 fontSize: "1.9rem",
                 fontWeight: 700,
                 lineHeight: 1.2,
                 margin: 0,
-                color: "#011F5B",
+                color: "var(--c-dark)",
                 maxWidth: 700,
               }}>
                 LLMs and Civic Discourse
               </h1>
               <div className="header-flex" style={{ display: "flex", alignItems: "stretch", gap: 32, marginTop: 14, flexWrap: "wrap" }}>
                 <p style={{
-                  fontFamily: "'Roboto', 'Helvetica Neue', Arial, sans-serif",
+                  fontFamily: "var(--f-sans)",
                   fontSize: 17,
-                  color: "#444",
+                  color: "var(--c-gray-dark)",
                   margin: 0,
                   lineHeight: 1.7,
                   fontWeight: 300,
@@ -1107,21 +1151,21 @@
                 }}>
                   Containing {papers.length} papers, this dashboard highlights recent research on how large language models (LLMs) shape civic discourse. The collection includes empirical studies examining political bias in LLM outputs, longitudinal audits tracking how LLMs handle political content over time, and experimental research testing how LLMs affect learning outcomes and political beliefs. It also features papers investigating trends in automated content moderation, including refusal patterns and potential speech suppression for different identity groups. Several papers explore whether and how LLMs might support democratic processes—from improving online political conversations to assisting with democratic deliberation. Together, these papers serve as a helpful primer for understanding current research on how LLMs are shaping political communication and civic participation.
                 </p>
-                <div className="convening-block" style={{ flex: "2 1 320px", display: "flex", flexDirection: "column", justifyContent: "space-between", gap: 10, background: "#eef2fb", border: "1px solid #d0daf2", borderLeft: "4px solid #011F5B", borderRadius: 8, padding: "14px 18px" }}>
+                <div className="convening-block" style={{ flex: "2 1 320px", display: "flex", flexDirection: "column", justifyContent: "space-between", gap: 10, background: "var(--c-light-bg)", border: "1px solid var(--c-border)", borderLeft: "4px solid var(--c-red)", borderRadius: 8, padding: "14px 18px" }}>
                   <h3 style={{
-                    fontFamily: "'EB Garamond', Georgia, 'Times New Roman', serif",
+                    fontFamily: "var(--f-serif)",
                     fontSize: 18,
                     fontWeight: 700,
-                    color: "#011F5B",
+                    color: "var(--c-dark)",
                     margin: 0,
                     lineHeight: 1.2,
                   }}>
                     Convening on LLMs and Civic Discourse
                   </h3>
                   <p style={{
-                    fontFamily: "'Roboto', 'Helvetica Neue', Arial, sans-serif",
+                    fontFamily: "var(--f-sans)",
                     fontSize: 14,
-                    color: "#444",
+                    color: "var(--c-gray-dark)",
                     margin: 0,
                     lineHeight: 1.55,
                     fontWeight: 300,
@@ -1138,19 +1182,18 @@
                       gap: 10,
                       alignSelf: "flex-start",
                       padding: "8px 16px",
-                      background: "#011F5B",
-                      color: "#fff",
+                      background: "var(--c-red)",
+                      color: "var(--c-white)",
                       borderRadius: 8,
                       textDecoration: "none",
-                      fontFamily: "'Roboto', 'Helvetica Neue', Arial, sans-serif",
+                      fontFamily: "var(--f-sans)",
                       fontSize: 13,
                       fontWeight: 500,
                       lineHeight: 1.4,
-                      boxShadow: "0 2px 8px rgba(1,31,91,0.18)",
-                      transition: "background 0.2s, box-shadow 0.2s",
+                      transition: "background 0.2s",
                     }}
-                    onMouseEnter={e => { e.currentTarget.style.background = "#011949"; e.currentTarget.style.boxShadow = "0 4px 14px rgba(1,31,91,0.28)"; }}
-                    onMouseLeave={e => { e.currentTarget.style.background = "#011F5B"; e.currentTarget.style.boxShadow = "0 2px 8px rgba(1,31,91,0.18)"; }}
+                    onMouseEnter={e => { e.currentTarget.style.background = "var(--c-red-dark)"; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = "var(--c-red)"; }}
                   >
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
                       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
@@ -1158,21 +1201,21 @@
                     LLM Civic Discourse – Topic Primer
                   </a>
                 </div>
-                <div className="convening-block" style={{ flex: "3 1 480px", display: "flex", flexDirection: "column", justifyContent: "space-between", gap: 10, background: "#eef2fb", border: "1px solid #d0daf2", borderLeft: "4px solid #011F5B", borderRadius: 8, padding: "14px 18px" }}>
+                <div className="convening-block" style={{ flex: "3 1 480px", display: "flex", flexDirection: "column", justifyContent: "space-between", gap: 10, background: "var(--c-light-bg)", border: "1px solid var(--c-border)", borderLeft: "4px solid var(--c-red)", borderRadius: 8, padding: "14px 18px" }}>
                   <h3 style={{
-                    fontFamily: "'EB Garamond', Georgia, 'Times New Roman', serif",
+                    fontFamily: "var(--f-serif)",
                     fontSize: 18,
                     fontWeight: 700,
-                    color: "#011F5B",
+                    color: "var(--c-dark)",
                     margin: 0,
                     lineHeight: 1.2,
                   }}>
                     Research Grants on LLM Civic Discourse
                   </h3>
                   <p style={{
-                    fontFamily: "'Roboto', 'Helvetica Neue', Arial, sans-serif",
+                    fontFamily: "var(--f-sans)",
                     fontSize: 14,
-                    color: "#444",
+                    color: "var(--c-gray-dark)",
                     margin: 0,
                     lineHeight: 1.55,
                     fontWeight: 300,
@@ -1180,9 +1223,9 @@
                     In 2026, Penn MEDIATED funded four grants to expand Penn's research on this essential topic:
                   </p>
                   <ul style={{
-                    fontFamily: "'Roboto', 'Helvetica Neue', Arial, sans-serif",
+                    fontFamily: "var(--f-sans)",
                     fontSize: 13.5,
-                    color: "#444",
+                    color: "var(--c-gray-dark)",
                     fontWeight: 300,
                     lineHeight: 1.55,
                     paddingLeft: 18,
@@ -1206,19 +1249,18 @@
                       gap: 10,
                       alignSelf: "flex-start",
                       padding: "8px 16px",
-                      background: "#011F5B",
-                      color: "#fff",
+                      background: "var(--c-red)",
+                      color: "var(--c-white)",
                       borderRadius: 8,
                       textDecoration: "none",
-                      fontFamily: "'Roboto', 'Helvetica Neue', Arial, sans-serif",
+                      fontFamily: "var(--f-sans)",
                       fontSize: 13,
                       fontWeight: 500,
                       lineHeight: 1.4,
-                      boxShadow: "0 2px 8px rgba(1,31,91,0.18)",
-                      transition: "background 0.2s, box-shadow 0.2s",
+                      transition: "background 0.2s",
                     }}
-                    onMouseEnter={e => { e.currentTarget.style.background = "#011949"; e.currentTarget.style.boxShadow = "0 4px 14px rgba(1,31,91,0.28)"; }}
-                    onMouseLeave={e => { e.currentTarget.style.background = "#011F5B"; e.currentTarget.style.boxShadow = "0 2px 8px rgba(1,31,91,0.18)"; }}
+                    onMouseEnter={e => { e.currentTarget.style.background = "var(--c-red-dark)"; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = "var(--c-red)"; }}
                   >
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
                       <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
@@ -1231,9 +1273,9 @@
           </header>
 
           {/* Controls */}
-          <div style={{ background: "#fff", borderBottom: "2px solid #dde3ee", boxShadow: "0 2px 10px rgba(1,31,91,0.06)" }}>
+          <div style={{ background: "var(--c-bg)", borderBottom: "2px solid var(--c-border)" }}>
           <div className="dashboard-container" style={{ maxWidth: 1280, margin: "0 auto", paddingTop: 18, paddingBottom: 14 }}>
-            <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center", paddingBottom: 12, marginBottom: 10, borderBottom: "1px solid #eef0f5" }}>
+            <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center", paddingBottom: 12, marginBottom: 10, borderBottom: "1px solid var(--c-border)" }}>
               <input
                 type="text"
                 placeholder="🔍  Search titles, authors, or content."
@@ -1243,18 +1285,18 @@
                   width: 260,
                   padding: "7px 12px",
                   borderRadius: 5,
-                  border: "1px solid #c8cfe0",
-                  background: "#fff",
-                  color: "#1a1a2e",
+                  border: "1px solid rgba(13,13,12,0.2)",
+                  background: "var(--c-white)",
+                  color: "var(--c-dark)",
                   fontSize: 13,
-                  fontFamily: "'Roboto', 'Helvetica Neue', Arial, sans-serif",
+                  fontFamily: "var(--f-sans)",
                   fontWeight: 400,
                   outline: "none",
                   boxSizing: "border-box",
                   transition: "border-color 0.2s",
                 }}
-                onFocus={(e) => e.target.style.borderColor = "#011F5B"}
-                onBlur={(e) => e.target.style.borderColor = "#c8cfe0"}
+                onFocus={(e) => e.target.style.borderColor = "var(--c-red)"}
+                onBlur={(e) => e.target.style.borderColor = "rgba(13,13,12,0.2)"}
               />
               <select
                 value={sortOrder}
@@ -1262,17 +1304,17 @@
                 style={{
                   padding: "7px 28px 7px 11px",
                   borderRadius: 5,
-                  border: "1px solid #c8cfe0",
-                  background: "#fff",
-                  color: "#1a1a2e",
+                  border: "1px solid rgba(13,13,12,0.2)",
+                  background: "var(--c-white)",
+                  color: "var(--c-dark)",
                   fontSize: 13,
-                  fontFamily: "'Roboto', 'Helvetica Neue', Arial, sans-serif",
+                  fontFamily: "var(--f-sans)",
                   cursor: "pointer",
                   outline: "none",
                   WebkitAppearance: "none",
                   MozAppearance: "none",
                   appearance: "none",
-                  backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%239a9690' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E\")",
+                  backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23888680' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E\")",
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: "right 12px center",
                 }}
@@ -1281,7 +1323,7 @@
                   <option key={o.value} value={o.value}>{o.label}</option>
                 ))}
               </select>
-              <p style={{ fontSize: 12, color: "#707070", margin: "0 0 0 auto", fontFamily: "'Roboto', 'Helvetica Neue', Arial, sans-serif", whiteSpace: "nowrap" }}>
+              <p style={{ fontSize: 12, color: "var(--c-gray)", margin: "0 0 0 auto", fontFamily: "var(--f-sans)", whiteSpace: "nowrap" }}>
                 Showing {filtered.length} of {papers.length} papers
               </p>
             </div>
@@ -1289,9 +1331,9 @@
             {/* Tag filters */}
             <div style={{ display: "grid", gridTemplateColumns: "auto 1fr", alignItems: "start", columnGap: 9, marginBottom: 8 }}>
               <span style={{
-                fontFamily: "'Roboto', 'Helvetica Neue', Arial, sans-serif",
+                fontFamily: "var(--f-sans)",
                 fontSize: 11, fontWeight: 700, textTransform: "uppercase",
-                letterSpacing: "0.8px", color: "#707070", whiteSpace: "nowrap", paddingTop: 4,
+                letterSpacing: "0.8px", color: "var(--c-gray)", whiteSpace: "nowrap", paddingTop: 4,
               }}>Themes</span>
               {/* Wrapping tags in their own flex container (separate from the
                   label) means every wrapped line starts at this container's
@@ -1312,7 +1354,7 @@
                       background: active ? s.bg : "transparent",
                       color: s.text,
                       fontSize: 12,
-                      fontFamily: "'Roboto', 'Helvetica Neue', Arial, sans-serif",
+                      fontFamily: "var(--f-sans)",
                       cursor: "pointer",
                       transition: "all 0.2s",
                       fontWeight: active ? 700 : 500,
@@ -1335,9 +1377,9 @@
                     borderRadius: 20,
                     border: "none",
                     background: "none",
-                    color: "#c00",
+                    color: "var(--c-red)",
                     fontSize: 12,
-                    fontFamily: "'Roboto', 'Helvetica Neue', Arial, sans-serif",
+                    fontFamily: "var(--f-sans)",
                     fontWeight: 500,
                     cursor: "pointer",
                   }}
@@ -1349,90 +1391,124 @@
           </div>
           </div>
 
-          {/* Cards */}
-          <div className="dashboard-container cards-grid" style={{ maxWidth: 1280, margin: "0 auto", paddingTop: 24, paddingBottom: 60 }}>
+          {/* Papers, row by row */}
+          <div className="dashboard-container" style={{ maxWidth: 1280, margin: "0 auto", paddingTop: 24, paddingBottom: 60 }}>
             {filtered.length === 0 && (
-              <div style={{ textAlign: "center", padding: "80px 20px", color: "#707070", fontSize: 15, fontFamily: "'Roboto', 'Helvetica Neue', Arial, sans-serif", gridColumn: "1 / -1" }}>
+              <div style={{ textAlign: "center", padding: "80px 20px", color: "var(--c-gray)", fontSize: 15, fontFamily: "var(--f-sans)", background: "var(--c-white)", border: "1px solid var(--c-border)", borderRadius: 8 }}>
                 <p style={{ fontSize: 32, marginBottom: 12 }}>&empty;</p>
                 No papers match your current filters.
               </div>
             )}
 
+            <div className="papers-list">
             {filtered.map((paper, idx) => {
               const expanded = expandedId === paper.id;
               const isPenn = paper.tags.includes("Penn Research");
               return (
                 <div
                   key={paper.id}
-                  className="paper-card"
-                  onClick={() => setExpandedId(expanded ? null : paper.id)}
+                  className="paper-row"
                   style={{
-                    position: "relative",
-                    background: "#fff",
-                    border: "1px solid " + (isPenn ? "#e8d98a" : "#dde3ee"),
+                    background: "var(--c-white)",
+                    border: "1px solid " + (isPenn ? "#e8d98a" : "var(--c-border)"),
                     borderRadius: 8,
-                    padding: "24px 28px",
-                    cursor: "pointer",
-                    transition: "box-shadow 0.2s",
                     overflow: "hidden",
+                    transition: "box-shadow 0.2s",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.boxShadow = "0 2px 16px rgba(1,31,91,.1)";
+                    e.currentTarget.style.boxShadow = "0 2px 16px rgba(13,13,12,.08)";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.boxShadow = "none";
                   }}
                 >
-                  {isPenn && (
-                    <span style={{
-                      position: "absolute", top: 0, left: 0,
-                      fontFamily: "'Roboto', 'Helvetica Neue', Arial, sans-serif", fontSize: 10,
-                      letterSpacing: "1.5px", textTransform: "uppercase", fontWeight: 700,
-                      color: "#8a6a00", background: "#fef3c0", border: "1px solid #e8d98a",
-                      borderRadius: "6px 0 8px 0", padding: "3px 9px",
-                    }}>Penn Research</span>
+                  <div
+                    className="paper-row-top"
+                    onClick={() => setExpandedId(expanded ? null : paper.id)}
+                    style={{ padding: "16px 20px", cursor: "pointer" }}
+                  >
+                    <div className="paper-row-title" style={{ display: "flex", flexDirection: "column", gap: 7, paddingRight: 14 }}>
+                      <div style={{ display: "flex", alignItems: "flex-start", gap: 7 }}>
+                        {isPenn && (
+                          <span style={{
+                            flexShrink: 0, marginTop: 2,
+                            fontFamily: "var(--f-sans)", fontSize: 9,
+                            letterSpacing: "0.5px", textTransform: "uppercase", fontWeight: 700,
+                            color: "#8a6a00", background: "#fef3c0", border: "1px solid #e8d98a",
+                            borderRadius: 4, padding: "3px 6px", whiteSpace: "nowrap",
+                          }}>Penn</span>
+                        )}
+                        <h2 style={{ fontFamily: "var(--f-serif)", fontSize: 15, fontWeight: 600, lineHeight: 1.45, margin: 0 }}>
+                          {paper.url ? (
+                            <a
+                              href={paper.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={e => e.stopPropagation()}
+                              style={{ color: "var(--c-red)", textDecoration: "none" }}
+                              onMouseEnter={e => { e.currentTarget.style.textDecoration = "underline"; }}
+                              onMouseLeave={e => { e.currentTarget.style.textDecoration = "none"; }}
+                            >{paper.title}</a>
+                          ) : <span style={{ color: "var(--c-red)" }}>{paper.title}</span>}
+                        </h2>
+                      </div>
+                      <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+                        {paper.tags.filter(tag => tag !== "Penn Research").map((tag) => {
+                          const s = getTagStyle(tag);
+                          return (
+                            <span key={tag} style={{ padding: "2px 9px", borderRadius: 10, background: s.bg, color: s.text, fontSize: 10, fontWeight: 500, fontFamily: "var(--f-sans)", border: "1px solid " + s.border + "30", whiteSpace: "nowrap" }}>{tag}</span>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    <div className="paper-row-authors" style={{ fontFamily: "var(--f-sans)", fontSize: 13, color: "var(--c-gray-dark)", lineHeight: 1.5, paddingTop: 2 }}>
+                      {paper.authors}
+                      <div style={{ marginTop: 4, fontSize: 11, textTransform: "uppercase", letterSpacing: "0.5px", color: "var(--c-gray)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{paper.journal}</div>
+                    </div>
+
+                    <div className="paper-row-year" style={{ fontFamily: "var(--f-sans)", fontSize: 13, color: "var(--c-gray)", paddingTop: 2 }}>{paper.year}</div>
+
+                    <div className="paper-row-preview" style={{ paddingTop: 2 }}>
+                      <p style={{
+                        margin: 0, fontFamily: "var(--f-sans)", fontSize: 13, color: "var(--c-gray-dark)", lineHeight: 1.6, fontWeight: 300,
+                        display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden",
+                      }}>{paper.summary}</p>
+                      <span style={{ marginTop: 8, display: "inline-flex", alignItems: "center", gap: 5, fontFamily: "var(--f-sans)", fontSize: 12, color: "var(--c-red)" }}>
+                        <svg width="13" height="13" viewBox="0 0 14 14" fill="none" style={{ transition: "transform 0.25s", transform: expanded ? "rotate(180deg)" : "rotate(0)", flexShrink: 0 }}>
+                          <path d="M2 5l5 5 5-5" stroke="var(--c-red)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        {expanded ? "Show less" : "Full summary & details"}
+                      </span>
+                    </div>
+                  </div>
+
+                  {expanded && (
+                    <div style={{ borderTop: "1px solid var(--c-border)", padding: "16px 20px 20px" }}>
+                      <p style={{ fontFamily: "var(--f-sans)", fontSize: 14, color: "var(--c-dark)", lineHeight: 1.8, margin: "0 0 16px", fontWeight: 300 }}>
+                        {paper.summary}
+                      </p>
+                      {paper.url && (
+                        <a
+                          href={paper.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={e => e.stopPropagation()}
+                          style={{
+                            display: "inline-block", background: "var(--c-red)", color: "var(--c-white)",
+                            fontFamily: "var(--f-sans)", fontSize: 13, fontWeight: 600,
+                            padding: "8px 20px", borderRadius: 5, textDecoration: "none", transition: "background 0.15s",
+                          }}
+                          onMouseEnter={e => { e.currentTarget.style.background = "var(--c-red-dark)"; }}
+                          onMouseLeave={e => { e.currentTarget.style.background = "var(--c-red)"; }}
+                        >Read Paper &rarr;</a>
+                      )}
+                    </div>
                   )}
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 8, minWidth: 0, overflow: "hidden" }}>
-                      <span style={{ fontFamily: "'Roboto', 'Helvetica Neue', Arial, sans-serif", fontSize: 11, letterSpacing: "1.5px", textTransform: "uppercase", color: "#707070", fontWeight: 500, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{paper.journal}</span>
-                    </div>
-                    <span style={{ fontFamily: "'Roboto', 'Helvetica Neue', Arial, sans-serif", fontSize: 13, fontWeight: 400, color: "#888" }}>{paper.year}</span>
-                  </div>
-
-                  <h2 style={{ fontFamily: "'EB Garamond', Georgia, 'Times New Roman', serif", fontSize: "clamp(17px, 2vw, 20px)", fontWeight: 600, lineHeight: 1.35, margin: "0 0 8px" }}>
-                    {paper.url ? (
-                      <a
-                        href={paper.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={e => e.stopPropagation()}
-                        style={{ color: "#0055A4", textDecoration: "underline", textDecorationColor: "#c8cfe0", textUnderlineOffset: 3, transition: "color 0.15s" }}
-                        onMouseEnter={e => { e.currentTarget.style.color = "#011F5B"; e.currentTarget.style.textDecorationColor = "#011F5B"; }}
-                        onMouseLeave={e => { e.currentTarget.style.color = "#0055A4"; e.currentTarget.style.textDecorationColor = "#c8cfe0"; }}
-                      >{paper.title}</a>
-                    ) : <span style={{ color: "#0055A4" }}>{paper.title}</span>}
-                  </h2>
-
-                  <p style={{ fontFamily: "'Roboto', 'Helvetica Neue', Arial, sans-serif", fontSize: 13, color: "#2a2a3e", margin: "0 0 14px", lineHeight: 1.4, fontWeight: 400 }}>{paper.authors}</p>
-
-                  <p style={{ fontFamily: "'Roboto', 'Helvetica Neue', Arial, sans-serif", fontSize: 14, color: "#1a1a2e", lineHeight: 1.75, margin: "0 0 16px", maxHeight: expanded ? 600 : 120, overflow: "hidden", transition: "all 0.35s ease" }}>
-                    {paper.summary}
-                  </p>
-
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                      {paper.tags.filter(tag => tag !== "Penn Research").map((tag) => {
-                        const s = getTagStyle(tag);
-                        return (
-                          <span key={tag} style={{ padding: "3px 10px", borderRadius: 12, background: s.bg, color: s.text, fontSize: 11, fontWeight: 500, fontFamily: "'Roboto', 'Helvetica Neue', Arial, sans-serif", border: "1px solid " + s.border + "30" }}>{tag}</span>
-                        );
-                      })}
-                    </div>
-                    <span style={{ fontSize: 11, color: "#707070", transition: "transform 0.3s", transform: expanded ? "rotate(180deg)" : "rotate(0)", display: "inline-block" }}>{"\u25BC"}</span>
-                  </div>
                 </div>
               );
             })}
+            </div>
           </div>
         </div>
       );
