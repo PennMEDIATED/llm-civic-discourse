@@ -1273,8 +1273,8 @@
                     style={{
                       padding: "4px 13px",
                       borderRadius: 0,
-                      border: "1.5px solid " + s.border,
-                      background: active ? s.bg : "transparent",
+                      border: (active ? "1.5px solid " + s.border : "1px solid " + s.border + "30"),
+                      background: s.bg,
                       color: s.text,
                       fontSize: 12,
                       fontFamily: "var(--f-sans)",
