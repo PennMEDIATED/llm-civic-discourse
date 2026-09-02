@@ -1332,7 +1332,7 @@
                     style={{ padding: "16px 20px", cursor: "pointer" }}
                   >
                     <div className="paper-row-title" style={{ display: "flex", flexDirection: "column", gap: 7, paddingRight: 14 }}>
-                      <h2 style={{ fontFamily: "var(--f-serif)", fontSize: 15, fontWeight: 600, lineHeight: 1.45, margin: 0 }}>
+                      <h2 style={{ fontFamily: "var(--f-serif)", fontSize: 17, fontWeight: 600, lineHeight: 1.4, margin: 0 }}>
                         {paper.url ? (
                           <a
                             href={paper.url}
@@ -1349,25 +1349,25 @@
                         {paper.tags.filter(tag => tag !== "Penn Research").map((tag) => {
                           const s = getTagStyle(tag);
                           return (
-                            <span key={tag} style={{ padding: "2px 9px", borderRadius: 0, background: s.bg, color: s.text, fontSize: 11, fontWeight: 500, fontFamily: "var(--f-sans)", border: "1px solid " + s.border + "30", whiteSpace: "nowrap" }}>{tag}</span>
+                            <span key={tag} style={{ padding: "2px 9px", borderRadius: 0, background: s.bg, color: s.text, fontSize: 12, fontWeight: 500, fontFamily: "var(--f-sans)", border: "1px solid " + s.border + "30", whiteSpace: "nowrap" }}>{tag}</span>
                           );
                         })}
                       </div>
                     </div>
 
-                    <div className="paper-row-authors" style={{ fontFamily: "var(--f-sans)", fontSize: 13, color: "var(--c-dark)", lineHeight: 1.5, paddingTop: 2 }}>
+                    <div className="paper-row-authors" style={{ fontFamily: "var(--f-sans)", fontSize: 15, color: "var(--c-dark)", lineHeight: 1.5, paddingTop: 2 }}>
                       {paper.authors}
-                      <div style={{ marginTop: 4, fontFamily: "var(--f-sans)", fontSize: 11, textTransform: "uppercase", letterSpacing: "0.5px", color: "var(--c-dark)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{paper.journal}</div>
+                      <div style={{ marginTop: 4, fontFamily: "var(--f-sans)", fontSize: 12, textTransform: "uppercase", letterSpacing: "0.5px", color: "var(--c-dark)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{paper.journal}</div>
                     </div>
 
-                    <div className="paper-row-year" style={{ fontFamily: "var(--f-sans)", fontSize: 13, color: "var(--c-dark)", paddingTop: 2 }}>{paper.year}</div>
+                    <div className="paper-row-year" style={{ fontFamily: "var(--f-sans)", fontSize: 15, color: "var(--c-dark)", paddingTop: 2 }}>{paper.year}</div>
 
                     <div className="paper-row-preview" style={{ paddingTop: 2 }}>
                       <p style={{
-                        margin: 0, fontFamily: "var(--f-sans)", fontSize: 13, color: "var(--c-dark)", lineHeight: 1.6, fontWeight: 300,
+                        margin: 0, fontFamily: "var(--f-sans)", fontSize: 15, color: "var(--c-dark)", lineHeight: 1.6, fontWeight: 300,
                         display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden",
                       }}>{paper.summary}</p>
-                      <span style={{ marginTop: 8, display: "inline-flex", alignItems: "center", gap: 5, fontFamily: "var(--f-sans)", fontSize: 12, color: "var(--c-red)" }}>
+                      <span style={{ marginTop: 8, display: "inline-flex", alignItems: "center", gap: 5, fontFamily: "var(--f-sans)", fontSize: 13, color: "var(--c-red)" }}>
                         <svg width="13" height="13" viewBox="0 0 14 14" fill="none" style={{ transition: "transform 0.25s", transform: expanded ? "rotate(180deg)" : "rotate(0)", flexShrink: 0 }}>
                           <path d="M2 5l5 5 5-5" stroke="var(--c-red)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
@@ -1378,7 +1378,7 @@
 
                   {expanded && (
                     <div style={{ borderTop: "1px solid var(--c-border)", padding: "16px 20px 20px" }}>
-                      <p style={{ fontFamily: "var(--f-sans)", fontSize: 14, color: "var(--c-dark)", lineHeight: 1.8, margin: "0 0 16px", fontWeight: 300 }}>
+                      <p style={{ fontFamily: "var(--f-sans)", fontSize: 16, color: "var(--c-dark)", lineHeight: 1.8, margin: "0 0 16px", fontWeight: 300 }}>
                         {paper.summary}
                       </p>
                       {paper.url && (
@@ -1389,7 +1389,7 @@
                           onClick={e => e.stopPropagation()}
                           style={{
                             display: "inline-block", background: "var(--c-red)", color: "var(--c-white)",
-                            fontFamily: "var(--f-sans)", fontSize: 13, fontWeight: 600,
+                            fontFamily: "var(--f-sans)", fontSize: 14, fontWeight: 600,
                             padding: "8px 20px", borderRadius: 0, textDecoration: "none", transition: "background 0.15s",
                           }}
                           onMouseEnter={e => { e.currentTarget.style.background = "var(--c-red-dark)"; }}
