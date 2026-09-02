@@ -33,6 +33,38 @@ This page's `:root` also carries `--c-muted` (`#c8c6c0`), not defined in `about`
 - **Paper cards** — sharp corners, `0 12px 24px rgba(13,13,12,.16)` hover shadow plus `translateY(-4px)` lift (the shared hover convention, previously just a shadow with no lift), same as `grants-overview`'s `.card:hover`. Titles are `display: block` and, since the "PENN" badge was removed, every title now left-aligns at the same edge regardless of Penn status. Unlike `grants-overview`'s modal-based "View full details," this page expands each card in place (accordion-style) — a deliberate choice for browsing a long list of summaries without leaving the page, kept from the pre-redesign version.
 - **Stats band** — solid `var(--c-accent)` purple, 80px top/bottom, sans 40px/600 white `h2`, matching `grants-overview`'s `.stats-band` (the documented solid-purple alternative to `--c-gradient`, not the two-tone gradient). Where `grants-overview` uses this band for aggregate cohort stats plus a 3-up pillar grid up top, this page repurposes it for a 2-up grid of "Related Center Programming" tiles (the Convening and Research Grants callouts) — same tile shape (`--c-light-bg` fill, `1px solid rgba(255,255,255,0.16)` border, sharp corners, red 16px/600 sans title, 14px/300 dark body) as `grants-overview`'s `.pillar-box`, collapsing from 2 columns to 1 at 900px the same way `.pillar-group` collapses at its own breakpoint. One deliberate anatomy delta from `grants-overview`: this band sits **below** the paper list, not between the header and the filter row — the research content leads the page, and the Center's related programming is a footer-like coda rather than the first thing a visitor sees.
 
+## Typography
+
+Sitewide convention. The `--fs-*`/`--lh-*` block at the top of the stylesheet is canonical and identical in every page repo.
+
+**Two families, no third.** `--f-serif` (EB Garamond) for page and section titles and pull-quote copy; `--f-sans` (DM Sans) for everything else. There is no monospace face — uppercase micro-labels are DM Sans, not Courier.
+
+**Sizes come from tokens, never raw px.**
+
+| Token | Mobile (=<480px) | Desktop (>=1440px) | Used for |
+| --- | --- | --- | --- |
+| `--fs-display` | 36px | 76px | full-bleed hero |
+| `--fs-h1` | 36px | 56px | page title |
+| `--fs-h2` | 26px | 40px | section titles |
+| `--fs-h3` | 20px | 24px | card and third-level titles |
+| `--fs-lede` | 18px | 20px | intro paragraphs |
+| `--fs-body` | 16px | 16px | body copy |
+| `--fs-small` | 14px | 14px | captions, meta, form controls |
+| `--fs-small-serif` | 15px | 15px | EB Garamond at small sizes |
+| `--fs-micro` | 12px | 12px | uppercase labels, tags, counts |
+
+The top five are `clamp()` values that interpolate across the viewport, so tablet widths need no separate `@media` override. Only add a breakpoint font-size when a specific layout actually demands it.
+
+**12px is the floor.** Nothing ships smaller.
+
+**Line heights are tokens too** — `--lh-display` 1.05, `--lh-heading` 1.15, `--lh-lede` 1.26, `--lh-title` 1.3, `--lh-body` 1.55. Never set a line-height in px; it breaks the fluid sizes.
+
+**Heading gaps.** Section title to first content is `var(--space-300)` (24px); page or hero title to content is `var(--space-250)` (20px).
+
+**Narrow viewports.** Grid tracks are `minmax(0, 1fr)` rather than `1fr`, and flex items holding text carry `min-width: 0`. Without those, a track or item is pinned to its widest child and pushes the page wider than the viewport on small screens.
+
+This page renders through React with Babel-standalone in the browser, so type is set in JSX inline style objects rather than CSS rules: `fontSize: "var(--fs-body)"`, not `fontSize: 16`. Values must be quoted strings — a bare number makes React append `px` and skip the token entirely.
+
 ## Keeping in sync
 
 If you change a token or component here that has an equivalent on `about`, `home`, `team-leadership`, or `grants-overview`, check whether the change belongs there too, and vice versa — these repos duplicate CSS (or, on this page, inline styles) rather than sharing a stylesheet, so consistency is a discipline, not something enforced automatically. The multi-select theme chips and in-place card expansion are unique to this page and don't need to propagate anywhere.
