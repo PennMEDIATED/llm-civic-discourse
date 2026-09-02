@@ -1058,28 +1058,33 @@
       { value: "title-desc", label: "Title (Z\u2013A)" },
     ];
 
-    // Display order for theme tags/filter chips — matches grants-overview's
-    // neutral .tag design (no per-category color-coding), so this list only
-    // controls ordering now, not color.
-    const TAG_ORDER = [
-      "Content Moderation",
-      "Misinformation & Fact-Checking",
-      "Political Bias & Ideology",
-      "Persuasion & Political Influence",
-      "Democracy & Public Deliberation",
-      "User Behavior & Information Effects",
-      "Benchmarks & Evaluation",
-      "Penn Research",
-    ];
+    const TAG_COLORS = {
+      "Content Moderation":               { bg: "#fde7f5", border: "#FF26AE", text: "#74114f" },
+      "Misinformation & Fact-Checking":   { bg: "#fdebe7", border: "#FF4825", text: "#742111" },
+      "Political Bias & Ideology":        { bg: "#ebe7fd", border: "#5A36FF", text: "#221174" },
+      "Persuasion & Political Influence": { bg: "#fdf8e7", border: "#FFCF26", text: "#745e11" },
+      "Democracy & Public Deliberation":  { bg: "#e7f7fd", border: "#26C5FF", text: "#115974" },
+      "User Behavior & Information Effects": { bg: "#e7fdf5", border: "#26FFAD", text: "#11744e" },
+      "Benchmarks & Evaluation":          { bg: "#effde7", border: "#6EFF26", text: "#327411" },
+      // Yellow updated to match the analogous-colors reference (#FFCF26),
+      // replacing the earlier muted gold (#e8d98a) — same trio pattern
+      // (light tint / saturated border / dark text) as every other tag.
+      "Penn Research":                    { bg: "#fdf8e7", border: "#FFCF26", text: "#745e11" },
+    };
 
     const allTags = [...new Set(papers.flatMap((p) => p.tags))].sort((a, b) => {
-      const ia = TAG_ORDER.indexOf(a);
-      const ib = TAG_ORDER.indexOf(b);
+      const order = Object.keys(TAG_COLORS);
+      const ia = order.indexOf(a);
+      const ib = order.indexOf(b);
       if (ia === -1 && ib === -1) return a.localeCompare(b);
       if (ia === -1) return 1;
       if (ib === -1) return -1;
       return ia - ib;
     });
+
+    function getTagStyle(tag) {
+      return TAG_COLORS[tag] || { bg: "#f4f4f2", border: "#888", text: "#555" };
+    }
 
     function applySort(list, order) {
       return list.slice().sort(function(a, b) {
@@ -1256,14 +1261,11 @@
               {/* Wrapping tags in their own flex container (separate from the
                   label) means every wrapped line starts at this container's
                   left edge, which lines up with the first tag in row 1 —
-                  not with the "Themes" label. Chip design matches
-                  grants-overview's neutral .tag (light-bg/gray-dark/subtle
-                  border) instead of per-category colors; active state is a
-                  solid dark fill since a plain border-color swap wouldn't
-                  read clearly against a uniform palette. */}
+                  not with the "Themes" label. */}
               <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: 7 }}>
               {allTags.map((tag) => {
                 const active = activeTags.includes(tag);
+                const s = getTagStyle(tag);
                 return (
                   <button
                     key={tag}
@@ -1271,9 +1273,9 @@
                     style={{
                       padding: "4px 13px",
                       borderRadius: 0,
-                      border: "1px solid " + (active ? "var(--c-dark)" : "var(--c-border)"),
-                      background: active ? "var(--c-dark)" : "var(--c-bg)",
-                      color: active ? "var(--c-white)" : "var(--c-gray-dark)",
+                      border: "1.5px solid " + s.border,
+                      background: active ? s.bg : "transparent",
+                      color: s.text,
                       fontSize: 12,
                       fontFamily: "var(--f-sans)",
                       cursor: "pointer",
@@ -1337,7 +1339,7 @@
                             flexShrink: 0, marginTop: 2,
                             fontFamily: "var(--f-sans)", fontSize: 11,
                             letterSpacing: "0.5px", textTransform: "uppercase", fontWeight: 700,
-                            color: "#8a6a00", background: "#fef3c0", border: "1px solid #e8d98a",
+                            color: "#745e11", background: "#fdf8e7", border: "1px solid #FFCF26",
                             borderRadius: 0, padding: "3px 6px", whiteSpace: "nowrap",
                           }}>Penn</span>
                         )}
@@ -1356,9 +1358,12 @@
                         </h2>
                       </div>
                       <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-                        {paper.tags.filter(tag => tag !== "Penn Research").map((tag) => (
-                          <span key={tag} style={{ padding: "3px 8px", borderRadius: 0, background: "var(--c-light-bg)", color: "var(--c-gray-dark)", fontSize: 10.5, fontFamily: "var(--f-sans)", border: "1px solid var(--c-border)", whiteSpace: "nowrap" }}>{tag}</span>
-                        ))}
+                        {paper.tags.filter(tag => tag !== "Penn Research").map((tag) => {
+                          const s = getTagStyle(tag);
+                          return (
+                            <span key={tag} style={{ padding: "2px 9px", borderRadius: 0, background: s.bg, color: s.text, fontSize: 11, fontWeight: 500, fontFamily: "var(--f-sans)", border: "1px solid " + s.border + "30", whiteSpace: "nowrap" }}>{tag}</span>
+                          );
+                        })}
                       </div>
                     </div>
 
