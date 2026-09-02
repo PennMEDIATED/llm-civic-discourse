@@ -1273,7 +1273,8 @@
                     style={{
                       padding: "4px 13px",
                       borderRadius: 0,
-                      border: (active ? "1.5px solid " + s.border : "1px solid " + s.border + "30"),
+                      border: (active ? "2px solid " + s.border : "1px solid " + s.border + "80"),
+                      boxShadow: active ? "0 0 0 3px " + s.border + "30" : "none",
                       background: s.bg,
                       color: s.text,
                       fontSize: 12,
@@ -1349,7 +1350,7 @@
                         {paper.tags.filter(tag => tag !== "Penn Research").map((tag) => {
                           const s = getTagStyle(tag);
                           return (
-                            <span key={tag} style={{ padding: "2px 9px", borderRadius: 0, background: s.bg, color: s.text, fontSize: 12, fontWeight: 500, fontFamily: "var(--f-sans)", border: "1px solid " + s.border + "30", whiteSpace: "nowrap" }}>{tag}</span>
+                            <span key={tag} style={{ padding: "2px 9px", borderRadius: 0, background: s.bg, color: s.text, fontSize: 12, fontWeight: 500, fontFamily: "var(--f-sans)", border: "1px solid " + s.border + "80", whiteSpace: "nowrap" }}>{tag}</span>
                           );
                         })}
                       </div>
