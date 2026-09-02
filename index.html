@@ -71,7 +71,7 @@
     /* Responsive layout — shared 1440px page cap / 80px side padding scale,
        stepping down to 32px at 900px and 20px at 480px, matching the
        about/home/grants-overview `--pad-x` convention. */
-    .dashboard-container { max-width: 1440px; margin: 0 auto; padding-left: var(--space-1000); padding-right: var(--space-1000); }
+    .dashboard-container { max-width: 1440px; margin: "var(--space-025)" auto; padding-left: var(--space-1000); padding-right: var(--space-1000); }
     @media (max-width: 900px) {
       .dashboard-container { padding-left: var(--space-400); padding-right: var(--space-400); }
     }
@@ -1163,7 +1163,7 @@
                 fontSize: "var(--fs-h1)",
                 fontWeight: 600,
                 lineHeight: "var(--lh-display)",
-                margin: "0 0 20px",
+                margin: "0 0 var(--space-250)",
                 color: "var(--c-accent)",
               }}>
                 LLMs and Civic Discourse
@@ -1172,7 +1172,7 @@
                 fontFamily: "var(--f-sans)",
                 fontSize: "var(--fs-lede)",
                 color: "var(--c-dark)",
-                margin: 0,
+                margin: "var(--space-025)",
                 lineHeight: "var(--lh-lede)",
                 fontWeight: 300,
               }}>
@@ -1190,18 +1190,18 @@
             <div className="dashboard-container" style={{ maxWidth: 1440, margin: "0 auto" }}>
               <h2 style={{
                 fontFamily: "var(--f-sans)", fontSize: "var(--fs-h2)", fontWeight: 600, letterSpacing: "-0.02em",
-                lineHeight: "var(--lh-heading)", color: "var(--c-white)", margin: "0 0 24px",
+                lineHeight: "var(--lh-heading)", color: "var(--c-white)", margin: "0 0 var(--space-300)",
               }}>
                 Related Center Programming
               </h2>
-              <div className="header-flex" style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 14 }}>
-                <div className="convening-block pillar-box" style={{ background: "var(--c-light-bg)", border: "1px solid rgba(255,255,255,0.16)", padding: "20px 22px", display: "flex", flexDirection: "column", gap: 10, minWidth: 0 }}>
+              <div className="header-flex" style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: "var(--space-200)" }}>
+                <div className="convening-block pillar-box" style={{ background: "var(--c-light-bg)", border: "1px solid rgba(255,255,255,0.16)", padding: "var(--space-250) var(--space-300)", display: "flex", flexDirection: "column", gap: "var(--space-150)", minWidth: 0 }}>
                   <h3 style={{
                     fontFamily: "var(--f-sans)",
                     fontSize: "var(--fs-body)",
                     fontWeight: 600,
                     color: "var(--c-red)",
-                    margin: 0,
+                    margin: "var(--space-025)",
                     lineHeight: "var(--lh-title)",
                   }}>
                     Convening on LLMs and Civic Discourse
@@ -1210,7 +1210,7 @@
                     fontFamily: "var(--f-sans)",
                     fontSize: "var(--fs-small)",
                     color: "var(--c-dark)",
-                    margin: 0,
+                    margin: "var(--space-025)",
                     lineHeight: "var(--lh-body)",
                     fontWeight: 300,
                   }}>
@@ -1224,9 +1224,9 @@
                     style={{
                       display: "inline-flex",
                       alignItems: "center",
-                      gap: 10,
+                      gap: "var(--space-150)",
                       alignSelf: "flex-start",
-                      padding: "8px 16px",
+                      padding: "var(--space-100) var(--space-200)",
                       background: "var(--c-red)",
                       color: "var(--c-white)",
                       borderRadius: 0,
@@ -1246,13 +1246,13 @@
                     LLM Civic Discourse – Topic Primer
                   </a>
                 </div>
-                <div className="convening-block pillar-box" style={{ background: "var(--c-light-bg)", border: "1px solid rgba(255,255,255,0.16)", padding: "20px 22px", display: "flex", flexDirection: "column", gap: 10, minWidth: 0 }}>
+                <div className="convening-block pillar-box" style={{ background: "var(--c-light-bg)", border: "1px solid rgba(255,255,255,0.16)", padding: "var(--space-250) var(--space-300)", display: "flex", flexDirection: "column", gap: "var(--space-150)", minWidth: 0 }}>
                   <h3 style={{
                     fontFamily: "var(--f-sans)",
                     fontSize: "var(--fs-body)",
                     fontWeight: 600,
                     color: "var(--c-red)",
-                    margin: 0,
+                    margin: "var(--space-025)",
                     lineHeight: "var(--lh-title)",
                   }}>
                     Research Grants on LLM Civic Discourse
@@ -1261,7 +1261,7 @@
                     fontFamily: "var(--f-sans)",
                     fontSize: "var(--fs-small)",
                     color: "var(--c-dark)",
-                    margin: 0,
+                    margin: "var(--space-025)",
                     lineHeight: "var(--lh-body)",
                     fontWeight: 300,
                   }}>
@@ -1273,11 +1273,11 @@
                     color: "var(--c-dark)",
                     fontWeight: 300,
                     lineHeight: "var(--lh-body)",
-                    paddingLeft: 18,
-                    margin: 0,
+                    paddingLeft: "var(--space-250)",
+                    margin: "var(--space-025)",
                     display: "flex",
                     flexDirection: "column",
-                    gap: 6,
+                    gap: "var(--space-075)",
                   }}>
                     <li>AI Watchman: Longitudinally Auditing Generative AI Content Moderation of Social Issues</li>
                     <li>Adversarial Testing of Misalignment in Frontier LLMs: When Asked to Create Anti-Democratic Campaign Materials</li>
@@ -1292,9 +1292,9 @@
                     style={{
                       display: "inline-flex",
                       alignItems: "center",
-                      gap: 10,
+                      gap: "var(--space-150)",
                       alignSelf: "flex-start",
-                      padding: "8px 16px",
+                      padding: "var(--space-100) var(--space-200)",
                       background: "var(--c-red)",
                       color: "var(--c-white)",
                       borderRadius: 0,
@@ -1325,8 +1325,8 @@
               grants-overview's single <select>, but the chips themselves are
               now sharp-cornered tags instead of rounded pills. */}
           <div style={{ background: "var(--c-light-bg)" }}>
-          <div className="dashboard-container" style={{ maxWidth: 1440, margin: "0 auto", paddingTop: 20, paddingBottom: 14 }}>
-            <div className="filter-row" style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center", background: "var(--c-bg)", border: "1px solid var(--c-border)", padding: "14px 16px", marginBottom: 18 }}>
+          <div className="dashboard-container" style={{ maxWidth: 1440, margin: "0 auto", paddingTop: "var(--space-250)", paddingBottom: "var(--space-200)" }}>
+            <div className="filter-row" style={{ display: "flex", gap: "var(--space-150)", flexWrap: "wrap", alignItems: "center", background: "var(--c-bg)", border: "1px solid var(--c-border)", padding: "var(--space-200) var(--space-200)", marginBottom: "var(--space-250)" }}>
               <div style={{ position: "relative", flex: "1 1 200px", minWidth: 160, width: 260 }}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--c-gray)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ position: "absolute", left: 11, top: "50%", transform: "translateY(-50%)", pointerEvents: "none" }}>
                   <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
@@ -1338,7 +1338,7 @@
                   onChange={(e) => setSearch(e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "9px 11px 9px 32px",
+                    padding: "var(--space-100) var(--space-150) var(--space-100) var(--space-400)",
                     borderRadius: 0,
                     border: "1px solid var(--c-border)",
                     background: "var(--c-light-bg)",
@@ -1358,7 +1358,7 @@
                 value={sortOrder}
                 onChange={(e) => setSortOrder(e.target.value)}
                 style={{
-                  padding: "9px 28px 9px 11px",
+                  padding: "var(--space-100) var(--space-400) var(--space-100) var(--space-150)",
                   borderRadius: 0,
                   border: "1px solid var(--c-border)",
                   background: "var(--c-light-bg)",
@@ -1384,7 +1384,7 @@
                   className="clear"
                   onClick={() => setActiveTags([])}
                   style={{
-                    padding: "9px 14px",
+                    padding: "var(--space-100) var(--space-200)",
                     borderRadius: 0,
                     border: "1px solid var(--c-border)",
                     background: "transparent",
@@ -1406,17 +1406,17 @@
             </div>
 
             {/* Tag filters */}
-            <div style={{ display: "grid", gridTemplateColumns: "auto minmax(0, 1fr)", alignItems: "start", columnGap: 9, marginBottom: 8 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "auto minmax(0, 1fr)", alignItems: "start", columnGap: "var(--space-100)", marginBottom: "var(--space-100)" }}>
               <span style={{
                 fontFamily: "var(--f-sans)",
                 fontSize: "var(--fs-micro)", fontWeight: 700, textTransform: "uppercase",
-                letterSpacing: "0.8px", color: "var(--c-dark)", whiteSpace: "nowrap", paddingTop: 4,
+                letterSpacing: "0.8px", color: "var(--c-dark)", whiteSpace: "nowrap", paddingTop: "var(--space-050)",
               }}>Themes</span>
               {/* Wrapping tags in their own flex container (separate from the
                   label) means every wrapped line starts at this container's
                   left edge, which lines up with the first tag in row 1 —
                   not with the "Themes" label. */}
-              <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: 7 }}>
+              <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "var(--space-100)" }}>
               {allTags.map((tag) => {
                 const active = activeTags.includes(tag);
                 const s = getTagStyle(tag);
@@ -1425,7 +1425,7 @@
                     key={tag}
                     onClick={() => toggleTag(tag)}
                     style={{
-                      padding: "4px 13px",
+                      padding: "var(--space-050) var(--space-150)",
                       borderRadius: 0,
                       border: (active ? "2.5px solid " + s.border : "1.5px solid " + s.border),
                       boxShadow: active ? "0 0 0 4px " + s.border + "40" : "none",
@@ -1450,10 +1450,10 @@
           </div>
 
           {/* Papers, row by row */}
-          <div className="dashboard-container" style={{ maxWidth: 1440, margin: "0 auto", paddingTop: 24, paddingBottom: 80 }}>
+          <div className="dashboard-container" style={{ maxWidth: 1440, margin: "0 auto", paddingTop: "var(--space-300)", paddingBottom: "var(--space-1000)" }}>
             {filtered.length === 0 && (
-              <div className="empty-state" style={{ textAlign: "center", padding: "80px 20px", color: "var(--c-dark)", fontSize: "var(--fs-small)", fontFamily: "var(--f-sans)", background: "var(--c-white)", border: "1px solid var(--c-border)", borderRadius: 0 }}>
-                <p style={{ fontSize: "var(--fs-h2)", marginBottom: 12 }}>&empty;</p>
+              <div className="empty-state" style={{ textAlign: "center", padding: "var(--space-1000) var(--space-250)", color: "var(--c-dark)", fontSize: "var(--fs-small)", fontFamily: "var(--f-sans)", background: "var(--c-white)", border: "1px solid var(--c-border)", borderRadius: 0 }}>
+                <p style={{ fontSize: "var(--fs-h2)", marginBottom: "var(--space-150)" }}>&empty;</p>
                 No papers match your current filters.
               </div>
             )}
@@ -1484,10 +1484,10 @@
                   <div
                     className="paper-row-top"
                     onClick={() => setExpandedId(expanded ? null : paper.id)}
-                    style={{ padding: "16px 20px", cursor: "pointer" }}
+                    style={{ padding: "var(--space-200) var(--space-250)", cursor: "pointer" }}
                   >
-                    <div className="paper-row-title" style={{ display: "flex", flexDirection: "column", gap: 7, paddingRight: 14 }}>
-                      <h2 style={{ fontFamily: "var(--f-serif)", fontSize: "var(--fs-body)", fontWeight: 600, lineHeight: "var(--lh-title)", margin: 0 }}>
+                    <div className="paper-row-title" style={{ display: "flex", flexDirection: "column", gap: "var(--space-100)", paddingRight: "var(--space-200)" }}>
+                      <h2 style={{ fontFamily: "var(--f-serif)", fontSize: "var(--fs-body)", fontWeight: 600, lineHeight: "var(--lh-title)", margin: "var(--space-025)" }}>
                         {paper.url ? (
                           <a
                             href={paper.url}
@@ -1500,29 +1500,29 @@
                           >{paper.title}</a>
                         ) : <span style={{ display: "block", color: "var(--c-dark)" }}>{paper.title}</span>}
                       </h2>
-                      <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+                      <div style={{ display: "flex", gap: "var(--space-075)", flexWrap: "wrap" }}>
                         {paper.tags.filter(tag => tag !== "Penn Research").map((tag) => {
                           const s = getTagStyle(tag);
                           return (
-                            <span key={tag} style={{ padding: "2px 9px", borderRadius: 0, background: s.bg, color: s.text, fontSize: "var(--fs-micro)", fontWeight: 500, fontFamily: "var(--f-sans)", border: "1px solid " + s.border + "80", whiteSpace: "nowrap" }}>{tag}</span>
+                            <span key={tag} style={{ padding: "var(--space-025) var(--space-100)", borderRadius: 0, background: s.bg, color: s.text, fontSize: "var(--fs-micro)", fontWeight: 500, fontFamily: "var(--f-sans)", border: "1px solid " + s.border + "80", whiteSpace: "nowrap" }}>{tag}</span>
                           );
                         })}
                       </div>
                     </div>
 
-                    <div className="paper-row-authors" style={{ fontFamily: "var(--f-sans)", fontSize: "var(--fs-small)", color: "var(--c-dark)", lineHeight: "var(--lh-body)", paddingTop: 2 }}>
+                    <div className="paper-row-authors" style={{ fontFamily: "var(--f-sans)", fontSize: "var(--fs-small)", color: "var(--c-dark)", lineHeight: "var(--lh-body)", paddingTop: "var(--space-025)" }}>
                       {paper.authors}
-                      <div style={{ marginTop: 4, fontFamily: "var(--f-sans)", fontSize: "var(--fs-micro)", textTransform: "uppercase", letterSpacing: "0.5px", color: "var(--c-dark)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{paper.journal}</div>
+                      <div style={{ marginTop: "var(--space-050)", fontFamily: "var(--f-sans)", fontSize: "var(--fs-micro)", textTransform: "uppercase", letterSpacing: "0.5px", color: "var(--c-dark)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{paper.journal}</div>
                     </div>
 
-                    <div className="paper-row-year" style={{ fontFamily: "var(--f-sans)", fontSize: "var(--fs-small)", color: "var(--c-dark)", paddingTop: 2 }}>{paper.year}</div>
+                    <div className="paper-row-year" style={{ fontFamily: "var(--f-sans)", fontSize: "var(--fs-small)", color: "var(--c-dark)", paddingTop: "var(--space-025)" }}>{paper.year}</div>
 
-                    <div className="paper-row-preview" style={{ paddingTop: 2 }}>
+                    <div className="paper-row-preview" style={{ paddingTop: "var(--space-025)" }}>
                       <p style={{
-                        margin: 0, fontFamily: "var(--f-sans)", fontSize: "var(--fs-small)", color: "var(--c-dark)", lineHeight: "var(--lh-body)", fontWeight: 300,
+                        margin: "var(--space-025)", fontFamily: "var(--f-sans)", fontSize: "var(--fs-small)", color: "var(--c-dark)", lineHeight: "var(--lh-body)", fontWeight: 300,
                         display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden",
                       }}>{paper.summary}</p>
-                      <span style={{ marginTop: 8, display: "inline-flex", alignItems: "center", gap: 5, fontFamily: "var(--f-sans)", fontSize: "var(--fs-small)", color: "var(--c-red)" }}>
+                      <span style={{ marginTop: "var(--space-100)", display: "inline-flex", alignItems: "center", gap: "var(--space-075)", fontFamily: "var(--f-sans)", fontSize: "var(--fs-small)", color: "var(--c-red)" }}>
                         <svg width="13" height="13" viewBox="0 0 14 14" fill="none" style={{ transition: "transform 0.25s", transform: expanded ? "rotate(180deg)" : "rotate(0)", flexShrink: 0 }}>
                           <path d="M2 5l5 5 5-5" stroke="var(--c-red)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
@@ -1532,8 +1532,8 @@
                   </div>
 
                   {expanded && (
-                    <div style={{ borderTop: "1px solid var(--c-border)", padding: "16px 20px 20px" }}>
-                      <p style={{ fontFamily: "var(--f-sans)", fontSize: "var(--fs-body)", color: "var(--c-dark)", lineHeight: "var(--lh-body)", margin: "0 0 16px", fontWeight: 300 }}>
+                    <div style={{ borderTop: "1px solid var(--c-border)", padding: "var(--space-200) var(--space-250) var(--space-250)" }}>
+                      <p style={{ fontFamily: "var(--f-sans)", fontSize: "var(--fs-body)", color: "var(--c-dark)", lineHeight: "var(--lh-body)", margin: "0 0 var(--space-200)", fontWeight: 300 }}>
                         {paper.summary}
                       </p>
                       {paper.url && (
@@ -1545,7 +1545,7 @@
                           style={{
                             display: "inline-block", background: "var(--c-red)", color: "var(--c-white)",
                             fontFamily: "var(--f-sans)", fontSize: "var(--fs-small)", fontWeight: 600,
-                            padding: "8px 20px", borderRadius: 0, textDecoration: "none", transition: "background 0.15s",
+                            padding: "var(--space-100) var(--space-250)", borderRadius: 0, textDecoration: "none", transition: "background 0.15s",
                           }}
                           onMouseEnter={e => { e.currentTarget.style.background = "var(--c-red-dark)"; }}
                           onMouseLeave={e => { e.currentTarget.style.background = "var(--c-red)"; }}
