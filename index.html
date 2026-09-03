@@ -124,15 +124,13 @@
     /* -------------------------------------------------------------------
        Whole-box link to another web page (Hyperlinks category 4).
        Black circle + gradient-slide arrow badge, matching about /
-       team-leadership / home / data. NOTE: every other repo pins the
-       badge to the box's top-RIGHT corner; this one is top-LEFT by
-       explicit request, so the box reserves extra top padding to keep
-       the badge clear of the heading.
+       team-leadership / home / data. The box reserves extra top padding
+       so the badge stays clear of the heading.
        ------------------------------------------------------------------- */
     .card-arrow {
       position: absolute;
       top: var(--space-100);
-      left: var(--space-100);
+      right: var(--space-100);
       z-index: 1;
       display: flex;
       align-items: center;
@@ -154,7 +152,7 @@
       100% { background-position: 200% 50%; }
     }
     a:hover .card-arrow {
-      transform: scale(1.15) translate(-2px, -2px);
+      transform: scale(1.15) translate(2px, -2px);
       background: linear-gradient(100deg, var(--c-accent), var(--c-red), var(--c-accent));
       background-size: 220% 100%;
       animation: card-arrow-slide 1.2s linear infinite;

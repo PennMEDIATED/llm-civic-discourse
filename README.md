@@ -99,7 +99,7 @@ Hover is **movement, not colour** — a lift or nudge. Do not darken or recolour
 
 **Exception:** a link to a research paper is category 2, not this — thin arrow, no badge.
 
-*Corner:* top-right is the default (`about`, `home`, `data`, `team-leadership`). `llm-civic-discourse`'s convening block pins it **top-left** by request; that box carries extra top padding so the badge clears its heading.
+*Corner:* the badge sits in the box's **top-right** corner in every repo (`about`, `home`, `data`, `team-leadership`, and this repo's convening block). A box carrying one reserves extra top padding so the badge clears its heading.
 
 **5. Hyperlinked headings** — a heading that is itself a link (a post title, a card title). Colour shift on hover per the ground rules above, and **no arrow and no underline**.
 
