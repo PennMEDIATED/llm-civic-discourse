@@ -1299,7 +1299,7 @@
                       gap: "var(--space-150)",
                       alignSelf: "flex-start",
                       padding: "var(--space-100) var(--space-200)",
-                      background: "var(--c-red)",
+                      background: "var(--c-red-dark)",
                       color: "var(--c-white)",
                       borderRadius: 0,
                       textDecoration: "none",
@@ -1421,7 +1421,7 @@
                   WebkitAppearance: "none",
                   MozAppearance: "none",
                   appearance: "none",
-                  backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14' fill='none'%3E%3Cpath d='M2 5l5 5 5-5' stroke='%23f03d1f' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E\")",
+                  backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14' fill='none'%3E%3Cpath d='M2 5l5 5 5-5' stroke='%23df3611' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E\")",
                   backgroundSize: "13px",
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: "right 12px center",
@@ -1446,7 +1446,7 @@
                     cursor: "pointer",
                     transition: "color 0.15s, border-color 0.15s",
                   }}
-                  onMouseEnter={e => { e.currentTarget.style.color = "var(--c-red)"; e.currentTarget.style.borderColor = "var(--c-red)"; }}
+                  onMouseEnter={e => { e.currentTarget.style.color = "var(--c-red-dark)"; e.currentTarget.style.borderColor = "var(--c-red-dark)"; }}
                   onMouseLeave={e => { e.currentTarget.style.color = "var(--c-dark)"; e.currentTarget.style.borderColor = "var(--c-border)"; }}
                 >
                   Clear filters
@@ -1574,9 +1574,9 @@
                         margin: "var(--space-025)", fontFamily: "var(--f-sans)", fontSize: "var(--fs-small)", color: "var(--c-dark)", lineHeight: "var(--lh-body)", fontWeight: 300,
                         display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden",
                       }}>{paper.summary}</p>
-                      <span style={{ marginTop: "var(--space-100)", display: "inline-flex", alignItems: "center", gap: "var(--space-075)", fontFamily: "var(--f-sans)", fontSize: "var(--fs-small)", color: "var(--c-red)" }}>
+                      <span style={{ marginTop: "var(--space-100)", display: "inline-flex", alignItems: "center", gap: "var(--space-075)", fontFamily: "var(--f-sans)", fontSize: "var(--fs-small)", color: "var(--c-red-dark)" }}>
                         <svg width="13" height="13" viewBox="0 0 14 14" fill="none" style={{ transition: "transform 0.25s", transform: expanded ? "rotate(180deg)" : "rotate(0)", flexShrink: 0 }}>
-                          <path d="M2 5l5 5 5-5" stroke="var(--c-red)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M2 5l5 5 5-5" stroke="var(--c-red-dark)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                         {expanded ? "Show less" : "Full summary & details"}
                       </span>
@@ -1595,12 +1595,15 @@
                           rel="noopener noreferrer"
                           onClick={e => e.stopPropagation()}
                           style={{
-                            display: "inline-block", background: "var(--c-red)", color: "var(--c-white)",
+                            display: "inline-block", background: "var(--c-red-dark)", color: "var(--c-white)",
                             fontFamily: "var(--f-sans)", fontSize: "var(--fs-small)", fontWeight: 600,
-                            padding: "var(--space-100) var(--space-250)", borderRadius: 0, textDecoration: "none", transition: "background 0.15s",
+                            padding: "var(--space-100) var(--space-250)", borderRadius: 0, textDecoration: "none",
+                            transition: "transform 0.2s ease, box-shadow 0.2s ease",
                           }}
-                          onMouseEnter={e => { e.currentTarget.style.background = "var(--c-red-dark)"; }}
-                          onMouseLeave={e => { e.currentTarget.style.background = "var(--c-red)"; }}
+                          onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)";
+                                               e.currentTarget.style.boxShadow = "0 12px 24px rgba(13,13,12,0.28)"; }}
+                          onMouseLeave={e => { e.currentTarget.style.transform = "none";
+                                               e.currentTarget.style.boxShadow = "none"; }}
                         >Read Paper &rarr;</a>
                       )}
                     </div>
