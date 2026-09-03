@@ -1542,9 +1542,9 @@
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={e => e.stopPropagation()}
-                            style={{ display: "block", color: "var(--c-dark)", textDecoration: "none" }}
-                            onMouseEnter={e => { e.currentTarget.style.textDecoration = "underline"; }}
-                            onMouseLeave={e => { e.currentTarget.style.textDecoration = "none"; }}
+                            style={{ display: "block", color: "var(--c-dark)", textDecoration: "none", transition: "color 0.15s" }}
+                            onMouseEnter={e => { e.currentTarget.style.color = "var(--c-red)"; }}
+                            onMouseLeave={e => { e.currentTarget.style.color = "var(--c-dark)"; }}
                           >{paper.title}</a>
                         ) : <span style={{ display: "block", color: "var(--c-dark)" }}>{paper.title}</span>}
                       </h2>
