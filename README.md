@@ -69,6 +69,102 @@ This page renders through React with Babel-standalone in the browser, so type is
 
 If you change a token or component here that has an equivalent on `about`, `home`, `team-leadership`, or `grants-overview`, check whether the change belongs there too, and vice versa — these repos duplicate CSS (or, on this page, inline styles) rather than sharing a stylesheet, so consistency is a discipline, not something enforced automatically. The multi-select theme chips and in-place card expansion are unique to this page and don't need to propagate anywhere.
 
+## Images and video
+
+This applies to every image, GIF and video added to any Penn MEDIATED repo. It is written to be followed directly — by a person or by a Claude session — without further instruction.
+
+### The one rule that is never optional
+
+**Every `<img>` and `<video>` carries explicit `width` and `height` attributes, holding the file's real intrinsic pixel dimensions.**
+
+```html
+<img src="assets/example.webp" width="640" height="334" alt="…">
+```
+
+They do not set the display size — CSS does. They give the browser the aspect ratio *before* the file downloads, so it reserves a correctly shaped box instead of collapsing to nothing and shoving everything below it down the page as each file lands. That shift is measured by search engines (Cumulative Layout Shift) and is worse for a reader, who loses their place or clicks a link that just moved.
+
+Every repo has a global `img, video { max-width: 100%; height: auto; display: block; }` reset, so the CSS keeps winning and the attributes only ever contribute the ratio. **Never guess the numbers** — read them off the file.
+
+### Pick the format by what the file is
+
+| Content | Format | Never use |
+| --- | --- | --- |
+| Photo, screenshot, artwork | **WebP**, quality 88 | PNG or JPEG at full camera resolution |
+| Logo, wordmark, icon | **SVG** if you have it, else WebP | — |
+| Anything that moves | **MP4** (H.264) + a WebP poster | **GIF, ever** |
+
+GIF is the big one. It has no interframe compression, so a screen recording is roughly ten times the size it needs to be: `research-compendium.gif` was 11.3MB for 290 frames; the identical recording as H.264 is 1.2MB.
+
+### Size it to the box it displays in, not to what you were sent
+
+Find the CSS box the image renders into, then export at **2×** that width for retina. Anything beyond that is bytes the browser downloads and immediately throws away. (`gni-membership.png` was 7992px wide, rendering into a 319px box — a 470KB file doing a 33KB job.)
+
+This repo currently ships no images, and its markup is JSX compiled in the browser by Babel. If you add one, remember that attribute values in JSX inline styles must be quoted strings, and put `width`/`height` on the tag as usual.
+
+If you are adding an image somewhere not listed, measure the box first (`getBoundingClientRect().width` in the browser, at a 1440px viewport) and double it.
+
+### Commands
+
+Stills — resize and convert in one pass:
+
+```python
+from PIL import Image
+TARGET = 640                      # 2x the CSS box
+im = Image.open('source.png')
+w, h = im.size
+if w > TARGET:
+    im = im.resize((TARGET, round(h * TARGET / w)), Image.LANCZOS)
+im.save('out.webp', quality=88, method=6)
+print(im.size)                    # <- these are the width/height attributes
+```
+
+Animation — MP4 plus a poster frame:
+
+```bash
+ffmpeg -i source.gif -movflags +faststart -pix_fmt yuv420p \
+       -vf "scale=1280:-2:flags=lanczos" -crf 24 out.mp4
+ffmpeg -i source.gif -frames:v 1 -vf "scale=1280:-2:flags=lanczos" poster.png
+python3 -c "from PIL import Image; Image.open('poster.png').convert('RGB').save('out-poster.webp', quality=80, method=6)"
+ffprobe -v error -show_entries stream=width,height -of default=nw=1 out.mp4
+```
+
+`-crf 24` is a good default; raise it toward 30 for a smaller file, lower it toward 20 for a sharper one. `-pix_fmt yuv420p` is required for Safari and iOS.
+
+### Markup for video
+
+```html
+<video src="assets/name.mp4" poster="assets/name-poster.webp" width="1280" height="622"
+       autoplay muted loop playsinline preload="metadata" aria-label="…"></video>
+```
+
+Each attribute earns its place: `muted` is what permits autoplay at all, `playsinline` stops iOS opening it fullscreen, `poster` means the slot is never empty while the video loads, and `aria-label` replaces `alt` (a `<video>` has no `alt`).
+
+CSS cannot stop autoplay, so **a page with video needs the reduced-motion script** at the end of `<body>`. If the page already has one, leave it alone; if you are adding the first video to a page, add it:
+
+```html
+<script>
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('video[autoplay]').forEach(function (v) {
+      v.autoplay = false; v.pause(); v.currentTime = 0; v.removeAttribute('loop');
+    });
+  }
+</script>
+```
+
+Also check the CSS: any rule that sizes or crops an image needs to name `video` too, or the video slot will not match the image slot it replaced (`.card__image img` becomes `.card__image img, .card__image video`).
+
+### Before you call it done
+
+- [ ] File is WebP, SVG or MP4 — no GIF, no full-resolution PNG or JPEG
+- [ ] Its width is about 2× the CSS box it renders into
+- [ ] `width`/`height` attributes match the file's real dimensions
+- [ ] Real `alt` text (or `aria-label` on a video) that describes the image; empty `alt=""` only if it is purely decorative
+- [ ] Lives in this repo's `assets/`, not hotlinked from another site
+- [ ] Page opened in a browser at 1440px and ~400px — nothing overflows, nothing jumps on load
+- [ ] Originals are not committed alongside the optimised file; git history is the backup
+
+Do not commit an unoptimised original "just in case" — the previous commit already holds it, and a duplicate in the working tree also ships to the server.
+
 ## Hyperlinks
 
 One taxonomy, five categories, shared by every page repo. Pick the category by what the link *is*, not by which repo you happen to be editing.
