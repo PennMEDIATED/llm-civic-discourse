@@ -120,6 +120,76 @@
     @media (max-width: 600px) {
       .paper-row-top { grid-template-columns: 1fr; grid-template-areas: "title" "authors" "year" "preview"; }
     }
+
+    /* -------------------------------------------------------------------
+       Whole-box link to another web page (Hyperlinks category 4).
+       Black circle + gradient-slide arrow badge, matching about /
+       team-leadership / home / data. NOTE: every other repo pins the
+       badge to the box's top-RIGHT corner; this one is top-LEFT by
+       explicit request, so the box reserves extra top padding to keep
+       the badge clear of the heading.
+       ------------------------------------------------------------------- */
+    .card-arrow {
+      position: absolute;
+      top: var(--space-100);
+      left: var(--space-100);
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--c-dark);
+      color: var(--c-white);
+      font-family: var(--f-sans);
+      font-size: var(--fs-micro);
+      line-height: 1;
+      transition: transform 0.2s ease;
+      pointer-events: none;
+    }
+    @keyframes card-arrow-slide {
+      0%   { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+    a:hover .card-arrow {
+      transform: scale(1.15) translate(-2px, -2px);
+      background: linear-gradient(100deg, var(--c-accent), var(--c-red), var(--c-accent));
+      background-size: 220% 100%;
+      animation: card-arrow-slide 1.2s linear infinite;
+    }
+
+    /* White tile that lifts with depth on hover — the same treatment as
+       team-leadership's .person-card and about's logo tiles. Movement,
+       not a colour swap. */
+    .convening-block--link {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-150);
+      min-width: 0;
+      background: var(--c-white);
+      border: 1px solid rgba(13, 13, 12, 0.08);
+      padding: var(--space-500) var(--space-300) var(--space-250);
+      text-decoration: none;
+      transition: box-shadow 0.15s, transform 0.15s;
+    }
+    .convening-block--link:hover {
+      box-shadow: 0 12px 24px rgba(13, 13, 12, 0.16);
+      transform: translateY(-4px);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .convening-block--link,
+      .convening-block--link:hover,
+      .card-arrow,
+      a:hover .card-arrow {
+        transform: none;
+        animation: none;
+        transition: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1235,10 +1305,12 @@
                       fontSize: "var(--fs-small)",
                       fontWeight: 500,
                       lineHeight: "var(--lh-body)",
-                      transition: "background 0.2s",
+                      transition: "transform 0.2s ease, box-shadow 0.2s ease",
                     }}
-                    onMouseEnter={e => { e.currentTarget.style.background = "var(--c-red-dark)"; }}
-                    onMouseLeave={e => { e.currentTarget.style.background = "var(--c-red)"; }}
+                    onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)";
+                                        e.currentTarget.style.boxShadow = "0 12px 24px rgba(13,13,12,0.28)"; }}
+                    onMouseLeave={e => { e.currentTarget.style.transform = "none";
+                                        e.currentTarget.style.boxShadow = "none"; }}
                   >
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
                       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
@@ -1246,7 +1318,13 @@
                     LLM Civic Discourse – Topic Primer
                   </a>
                 </div>
-                <div className="convening-block pillar-box" style={{ background: "var(--c-light-bg)", border: "1px solid rgba(255,255,255,0.16)", padding: "var(--space-250) var(--space-300)", display: "flex", flexDirection: "column", gap: "var(--space-150)", minWidth: 0 }}>
+                <a
+                  href="http://infodem.upenn.edu/grants"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="convening-block pillar-box convening-block--link"
+                >
+                  <span className="card-arrow" aria-hidden="true">&#8599;</span>
                   <h3 style={{
                     fontFamily: "var(--f-sans)",
                     fontSize: "var(--fs-body)",
@@ -1284,36 +1362,7 @@
                     <li>Information Density and Narrative Persuasion in AI Chatbots: Cross-National Evidence from India and the United States</li>
                     <li>How AI Transforms News: Measuring Bias and Distortion During LLM Conversations</li>
                   </ul>
-                  <a
-                    href="http://infodem.upenn.edu/grants"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="cta-btn"
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "var(--space-150)",
-                      alignSelf: "flex-start",
-                      padding: "var(--space-100) var(--space-200)",
-                      background: "var(--c-red)",
-                      color: "var(--c-white)",
-                      borderRadius: 0,
-                      textDecoration: "none",
-                      fontFamily: "var(--f-sans)",
-                      fontSize: "var(--fs-small)",
-                      fontWeight: 500,
-                      lineHeight: "var(--lh-body)",
-                      transition: "background 0.2s",
-                    }}
-                    onMouseEnter={e => { e.currentTarget.style.background = "var(--c-red-dark)"; }}
-                    onMouseLeave={e => { e.currentTarget.style.background = "var(--c-red)"; }}
-                  >
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
-                    </svg>
-                    Penn MEDIATED Research Grants
-                  </a>
-                </div>
+                </a>
               </div>
             </div>
           </div>
@@ -1370,7 +1419,8 @@
                   WebkitAppearance: "none",
                   MozAppearance: "none",
                   appearance: "none",
-                  backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23888680' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E\")",
+                  backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14' fill='none'%3E%3Cpath d='M2 5l5 5 5-5' stroke='%23f03d1f' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E\")",
+                  backgroundSize: "13px",
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: "right 12px center",
                 }}
