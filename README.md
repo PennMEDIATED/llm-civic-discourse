@@ -69,6 +69,23 @@ This page renders through React with Babel-standalone in the browser, so type is
 
 If you change a token or component here that has an equivalent on `about`, `home`, `team-leadership`, or `grants-overview`, check whether the change belongs there too, and vice versa — these repos duplicate CSS (or, on this page, inline styles) rather than sharing a stylesheet, so consistency is a discipline, not something enforced automatically. The multi-select theme chips and in-place card expansion are unique to this page and don't need to propagate anywhere.
 
+## Embedding this page
+
+WordPress renders the real site; this repo is the source. The launch plan is direct-to-disk deployment, which needs no iframe — but iframe embedding still works and is the documented fallback, so keep this snippet accurate if you rename the repo or change its Pages URL.
+
+Paste into a WordPress Code block (or Divi Code module) as one line:
+
+```html
+<iframe id="pm-llm-civic-discourse" src="https://pennmediated.github.io/llm-civic-discourse/" title="LLMs & Civic Discourse — Penn MEDIATED" loading="lazy" style="width:100%;height:16000px;border:0;display:block"></iframe><script>(function(){var f=document.getElementById('pm-llm-civic-discourse');window.addEventListener('message',function(e){if(e.source!==f.contentWindow)return;var d=e.data||{},h=d.frameHeight||(d.type==='partners-page-resize'?d.height:0);if(h)f.style.height=h+'px';});})();</script>
+```
+
+GitHub Pages is not enabled for this repo yet, so the URL above 404s until it is. Everything else about the snippet is ready.
+
+The `height` in the snippet is only the starting value. Every Penn MEDIATED page posts its real height to the parent as `{{ frameHeight: <int> }}` — on load, on resize, once webfonts settle, and on any `ResizeObserver` change, so reveal animations, expanding cards and `<details>` toggles all resize the frame. The listener in the snippet applies it. `grants-rfp` also emits an older `{{ type: 'partners-page-resize', height }}` message; the snippet accepts both.
+
+The page checks `window.self === window.top` before posting, so opening it directly does nothing. If you add a new page repo, copy the script from the bottom of this `index.html` so it behaves the same way.
+
+
 ## Images and video
 
 This applies to every image, GIF and video added to any Penn MEDIATED repo. It is written to be followed directly — by a person or by a Claude session — without further instruction.
