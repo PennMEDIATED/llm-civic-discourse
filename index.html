@@ -23,7 +23,11 @@
       --c-light-bg:  #f8f7f4;
       --c-accent:    #5533ee;
       --c-red:       #f03d1f;
-      --c-red-dark:  #d5341a;
+      /* Deeper red-orange — the gradient's closing stop, promoted to a token
+         of its own. Link text on a white/light ground uses this: --c-red
+         only reaches ~3.9:1 against white, this clears 4.5:1. --c-red stays
+         the brand accent for fills, borders, icons, tags and labels. */
+      --c-red-dark:  #df3611;
       --c-gray:      #888680;
       --c-gray-dark: #54534f;
       --c-muted:     #c8c6c0;
@@ -1543,7 +1547,7 @@
                             rel="noopener noreferrer"
                             onClick={e => e.stopPropagation()}
                             style={{ display: "block", color: "var(--c-dark)", textDecoration: "none", transition: "color 0.15s" }}
-                            onMouseEnter={e => { e.currentTarget.style.color = "var(--c-red)"; }}
+                            onMouseEnter={e => { e.currentTarget.style.color = "var(--c-red-dark)"; }}
                             onMouseLeave={e => { e.currentTarget.style.color = "var(--c-dark)"; }}
                           >{paper.title}</a>
                         ) : <span style={{ display: "block", color: "var(--c-dark)" }}>{paper.title}</span>}
