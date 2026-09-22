@@ -1632,21 +1632,18 @@
 
   <script>
     // Auto-resize: sends page height to parent iframe so WordPress can resize accordingly
+    window._lastSentHeight = 0;
     function sendHeight() {
       if (window.self === window.top) return;
-      /* Measure with getBoundingClientRect(), not scrollHeight. scrollHeight is
-         rounded to a whole pixel while real layout heights are fractional, so it
-         can report a fraction of a pixel SHORT of the content. The parent then
-         sizes the frame just under what it holds, this document becomes
-         scrollable by that fraction, and it swallows every wheel event over the
-         iframe — the page looks frozen unless you drag the scrollbar. Round up
-         and add 1px of slack so the frame is never shorter than its content. */
-      var height = Math.max(
-        document.documentElement.getBoundingClientRect().height,
-        document.body.getBoundingClientRect().height,
-        document.documentElement.scrollHeight
-      );
-      window.parent.postMessage({ frameHeight: Math.ceil(height) + 1 }, "*");
+      /* scrollHeight only, no slack — see the other repos: padding the height
+         feeds back as a taller frame and the iframe grows without bound. */
+      var height = Math.ceil(Math.max(
+        document.documentElement.scrollHeight,
+        document.body.scrollHeight
+      ));
+      if (Math.abs(height - window._lastSentHeight) < 2) return;
+      window._lastSentHeight = height;
+      window.parent.postMessage({ frameHeight: height }, "*");
     }
     // Send on load
     window.addEventListener("load", sendHeight);
