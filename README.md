@@ -1,6 +1,6 @@
 # Penn MEDIATED — LLMs and Civic Discourse
 
-A literature-review dashboard tracking research on how large language models shape civic discourse, for the [Center on Media, Technology and Democracy](https://infodem.upenn.edu). Searchable/filterable/sortable list of papers, each expandable in place for its full summary and a link to the source.
+A literature-review dashboard tracking research on how large language models shape civic discourse, for the [Center on Media, Technology and Democracy](https://mediated.upenn.edu). Searchable/filterable/sortable list of papers, each expandable in place for its full summary and a link to the source.
 
 - `index.html` — page markup **and** all styling/behavior. Unlike its sibling repos, this page is a small React app (React + ReactDOM + Babel Standalone loaded from cdnjs, JSX compiled in-browser — no build step or `npm install` either way, just a heavier `<script type="text/babel">` than a plain `<script>`). The paper data lives as a `papers` array of objects at the top of that script; there's no separate `styles.css` — design-token CSS lives in the `<style>` block in `<head>`, and everything else is inline `style={{}}` on each element.
 - `LLM Civic Discourse Convening - Topic Primer.pdf` — linked from the "Convening" tile in the stats band.
