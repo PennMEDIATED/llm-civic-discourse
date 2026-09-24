@@ -258,6 +258,121 @@
     .link-independent:hover { color: var(--c-red-dark); border-color: var(--c-red-dark); }
 
     .pillar-box { border-radius: var(--radius-card); }
+    /* ── Header (Sept 2026): intro left, related programming stacked right ── */
+    .llm-hero { background: var(--c-bg); }
+    .llm-hero__inner {
+      max-width: 1440px; margin: 0 auto;
+      padding-top: var(--space-1000); padding-bottom: var(--space-400);
+      display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: var(--space-600); align-items: start;
+    }
+    /* Orange uppercase eyebrow, the same treatment as the compendium's
+       "Center newsletter" label. */
+    .llm-eyebrow {
+      font-family: var(--f-sans); font-size: var(--fs-micro); font-weight: 700;
+      letter-spacing: 1.44px; text-transform: uppercase; color: var(--c-red);
+      margin-bottom: var(--space-150);
+    }
+    .llm-hero__title {
+      font-family: var(--f-serif); font-size: var(--fs-h1); font-weight: 600;
+      line-height: var(--lh-display); color: var(--c-accent); margin-bottom: var(--space-250);
+    }
+    .llm-hero__lede {
+      font-family: var(--f-sans); font-size: var(--fs-body); font-weight: 300;
+      line-height: var(--lh-body); color: var(--c-dark);
+    }
+    .related-list { display: flex; flex-direction: column; gap: var(--space-100); }
+    .related-card {
+      background: var(--c-light-bg); border: 1px solid var(--c-border);
+      border-radius: var(--radius-card); padding: var(--space-150) var(--space-200);
+      display: flex; flex-direction: column; gap: var(--space-075); align-items: flex-start;
+    }
+    .related-card h3 {
+      font-family: var(--f-sans); font-size: var(--fs-body); font-weight: 600;
+      line-height: var(--lh-title); color: var(--c-dark);
+    }
+    .related-card p, .related-card li {
+      font-family: var(--f-sans); font-size: var(--fs-small); font-weight: 300;
+      line-height: 1.45; color: var(--c-dark);
+    }
+    .related-card ul { padding-left: var(--space-250); display: flex; flex-direction: column; gap: var(--space-025); }
+    .related-card .link-independent { margin-top: var(--space-025); }
+    /* "See the four grants": same chevron-and-label toggle as the research
+       compendium's "Full summary & details". */
+    .related-toggle {
+      display: inline-flex; align-items: center; gap: var(--space-075);
+      font-family: var(--f-sans); font-size: var(--fs-small); font-weight: 500;
+      color: var(--c-red-dark); background: none; border: 0; padding: 0; cursor: pointer;
+    }
+    .related-toggle svg { transition: transform 0.25s; }
+    .related-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+    .related-toggle:hover { text-decoration: underline; text-underline-offset: 3px; }
+    @media (max-width: 900px) {
+      .llm-hero__inner { grid-template-columns: minmax(0, 1fr); gap: var(--space-500); }
+    }
+
+    /* ── Paper cards: three per row, as on the original page ── */
+    .llm-grid-wrap { max-width: 1440px; margin: 0 auto; padding-top: var(--space-200); padding-bottom: var(--space-1000); }
+    .cards-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-200); align-items: start; }
+    @media (max-width: 1100px) { .cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 700px)  { .cards-grid { grid-template-columns: minmax(0, 1fr); } }
+    .paper-card {
+      position: relative; display: flex; flex-direction: column; min-width: 0;
+      background: var(--c-white); border: 1px solid var(--c-border); border-radius: var(--radius-card);
+      padding: var(--space-300); cursor: pointer; overflow: hidden;
+      transition: box-shadow 0.15s, transform 0.15s;
+      animation: fadeSlideIn 0.3s ease forwards;
+    }
+    .paper-card:hover { box-shadow: 0 12px 24px rgba(13,13,12,0.16); transform: translateY(-4px); }
+    .paper-card.is-penn { border-color: #b7a0fb; padding-top: var(--space-600); }
+    /* "Penn Research" corner label, in the Penn Research filter chip's colours. */
+    .paper-card__penn {
+      position: absolute; top: 0; left: 0;
+      font-family: var(--f-sans); font-size: var(--fs-micro); font-weight: 700;
+      letter-spacing: 1.2px; text-transform: uppercase;
+      background: #f6f4ff; color: #4d3680; border-right: 1px solid #b7a0fb; border-bottom: 1px solid #b7a0fb;
+      border-radius: 0 0 var(--radius-control) 0; padding: var(--space-050) var(--space-150);
+    }
+    .paper-card__meta {
+      display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-150);
+      font-family: var(--f-sans); font-size: var(--fs-micro); color: var(--c-gray-dark);
+      margin-bottom: var(--space-100);
+    }
+    .paper-card__journal { text-transform: uppercase; letter-spacing: 1px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .paper-card__year { flex-shrink: 0; font-size: var(--fs-small); }
+    .paper-card__title {
+      font-family: var(--f-serif); font-size: clamp(18px, 17px + 0.25vw, 20px); font-weight: 600;
+      line-height: var(--lh-title); margin-bottom: var(--space-100);
+    }
+    .paper-card__title a, .paper-card__title span { color: var(--c-dark); text-decoration: none; transition: color 0.15s; }
+    .paper-card__title a:hover { color: var(--c-red-dark); }
+    .paper-card__authors { font-family: var(--f-sans); font-size: var(--fs-small); color: var(--c-dark); line-height: var(--lh-title); margin-bottom: var(--space-150); }
+    .paper-card__summary {
+      font-family: var(--f-sans); font-size: var(--fs-small); font-weight: 300; line-height: var(--lh-body); color: var(--c-dark);
+      margin-bottom: var(--space-200);
+      display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .paper-card.is-expanded .paper-card__summary { display: block; -webkit-line-clamp: unset; overflow: visible; }
+    .paper-card__foot { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; gap: var(--space-150); }
+    .paper-card__tags { display: flex; flex-wrap: wrap; gap: var(--space-075); min-width: 0; }
+    .paper-card__tag {
+      padding: var(--space-025) var(--space-100); border: 1px solid; border-radius: var(--radius-control);
+      font-family: var(--f-sans); font-size: var(--fs-micro); font-weight: 500; white-space: nowrap;
+    }
+    .paper-card__toggle {
+      flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center;
+      width: 28px; height: 28px; border: 0; border-radius: var(--radius-control); background: none;
+      color: var(--c-red-dark); cursor: pointer;
+    }
+    .paper-card__toggle svg { transition: transform 0.25s; }
+    .paper-card.is-expanded .paper-card__toggle svg { transform: rotate(180deg); }
+    .empty-state {
+      text-align: center; padding: var(--space-1000) var(--space-250);
+      font-family: var(--f-sans); font-size: var(--fs-small); color: var(--c-dark);
+      background: var(--c-white); border: 1px solid var(--c-border); border-radius: var(--radius-card);
+    }
+    .empty-state__mark { font-size: var(--fs-h2); margin-bottom: var(--space-150); }
+
   
 /* ── Trailing-margin guard ─────────────────────────────────────────────────
    These pages are embedded in an iframe that is resized to the height this

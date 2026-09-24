@@ -911,6 +911,7 @@ function Dashboard() {
   const [activeTags, setActiveTags] = useState([]);
   const [search, setSearch] = useState("");
   const [expandedId, setExpandedId] = useState(null);
+  const [grantsOpen, setGrantsOpen] = useState(false);
   const toggleTag = tag => {
     setActiveTags(prev => prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]);
   };
@@ -929,192 +930,47 @@ function Dashboard() {
     filtered = filtered.filter(p => p.title.toLowerCase().includes(q) || p.authors.toLowerCase().includes(q) || p.summary.toLowerCase().includes(q) || p.journal.toLowerCase().includes(q));
   }
   filtered = applySort(filtered, sortOrder);
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("header", {
-    style: {
-      background: "var(--c-bg)"
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "dashboard-container header-inner",
-    style: {
-      maxWidth: 1440,
-      margin: "0 auto",
-      paddingTop: "var(--space-1000)",
-      paddingBottom: "var(--space-600)"
-    }
-  }, /*#__PURE__*/React.createElement("h1", {
-    className: "page-hero-title",
-    style: {
-      fontFamily: "var(--f-serif)",
-      fontSize: "var(--fs-h1)",
-      fontWeight: 600,
-      lineHeight: "var(--lh-display)",
-      margin: "0 0 var(--space-250)",
-      color: "var(--c-accent)"
-    }
-  }, "LLMs and Civic Discourse"), /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontFamily: "var(--f-sans)",
-      fontSize: "var(--fs-lede)",
-      color: "var(--c-dark)",
-      margin: "var(--space-025)",
-      lineHeight: "var(--lh-lede)",
-      fontWeight: 300
-    }
-  }, "Containing ", papers.length, " papers, this dashboard highlights recent research on how large language models (LLMs) shape civic discourse. The collection includes empirical studies examining political bias in LLM outputs, longitudinal audits tracking how LLMs handle political content over time, and experimental research testing how LLMs affect learning outcomes and political beliefs. It also features papers investigating trends in automated content moderation, including refusal patterns and potential speech suppression for different identity groups. Several papers explore whether and how LLMs might support democratic processes\u2014from improving online political conversations to assisting with democratic deliberation. Together, these papers serve as a helpful primer for understanding current research on how LLMs are shaping political communication and civic participation."))), /*#__PURE__*/React.createElement("div", {
-    className: "stats-band",
-    style: {
-      background: "var(--c-accent)",
-      padding: "var(--space-1000) 0"
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "dashboard-container",
-    style: {
-      maxWidth: 1440,
-      margin: "0 auto"
-    }
-  }, /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontFamily: "var(--f-sans)",
-      fontSize: "var(--fs-h2)",
-      fontWeight: 600,
-      letterSpacing: "-0.02em",
-      lineHeight: "var(--lh-heading)",
-      color: "var(--c-white)",
-      margin: "0 0 var(--space-300)"
-    }
-  }, "Related Center Programming"), /*#__PURE__*/React.createElement("div", {
-    className: "header-flex",
-    style: {
-      display: "grid",
-      gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-      gap: "var(--space-200)"
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "convening-block pillar-box",
-    style: {
-      background: "var(--c-light-bg)",
-      border: "1px solid rgba(255,255,255,0.16)",
-      padding: "var(--space-250) var(--space-300)",
-      display: "flex",
-      flexDirection: "column",
-      gap: "var(--space-150)",
-      minWidth: 0
-    }
-  }, /*#__PURE__*/React.createElement("h3", {
-    style: {
-      fontFamily: "var(--f-sans)",
-      fontSize: "var(--fs-body)",
-      fontWeight: 600,
-      color: "var(--c-red)",
-      margin: "var(--space-025)",
-      lineHeight: "var(--lh-title)"
-    }
-  }, "Convening on LLMs and Civic Discourse"), /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontFamily: "var(--f-sans)",
-      fontSize: "var(--fs-small)",
-      color: "var(--c-dark)",
-      margin: "var(--space-025)",
-      lineHeight: "var(--lh-body)",
-      fontWeight: 300
-    }
-  }, "On March 4th, Penn MEDIATED hosted an online convening of prominent academic researchers and civil society organizations to share results from, and approaches to, monitoring and evaluating LLM civic discourse\u2014how LLMs discuss political topics, refer to politicians, and relate election information. You can see the topic primer for that convening below."), /*#__PURE__*/React.createElement("a", {
-    href: "LLM Civic Discourse Convening - Topic Primer.pdf",
-    target: "_blank",
-    rel: "noopener noreferrer",
-    className: "cta-btn",
-    style: {
-      display: "inline-flex",
-      alignItems: "center",
-      gap: "var(--space-150)",
-      alignSelf: "flex-start",
-      padding: "var(--space-100) var(--space-200)",
-      background: "var(--c-red-dark)",
-      color: "var(--c-white)",
-      borderRadius: "var(--radius-control)",
-      textDecoration: "none",
-      fontFamily: "var(--f-sans)",
-      fontSize: "var(--fs-small)",
-      fontWeight: 500,
-      lineHeight: "var(--lh-body)",
-      transition: "transform 0.2s ease, box-shadow 0.2s ease"
-    },
-    onMouseEnter: e => {
-      e.currentTarget.style.transform = "translateY(-3px)";
-      e.currentTarget.style.boxShadow = "0 12px 24px rgba(13,13,12,0.28)";
-    },
-    onMouseLeave: e => {
-      e.currentTarget.style.transform = "none";
-      e.currentTarget.style.boxShadow = "none";
-    }
-  }, /*#__PURE__*/React.createElement("svg", {
-    width: "15",
-    height: "15",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round",
-    style: {
-      flexShrink: 0
-    }
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-  }), /*#__PURE__*/React.createElement("polyline", {
-    points: "14 2 14 8 20 8"
-  }), /*#__PURE__*/React.createElement("line", {
-    x1: "16",
-    y1: "13",
-    x2: "8",
-    y2: "13"
-  }), /*#__PURE__*/React.createElement("line", {
-    x1: "16",
-    y1: "17",
-    x2: "8",
-    y2: "17"
-  }), /*#__PURE__*/React.createElement("polyline", {
-    points: "10 9 9 9 8 9"
-  })), "LLM Civic Discourse \u2013 Topic Primer")), /*#__PURE__*/React.createElement("a", {
-    href: "https://mediated.upenn.edu/grants-overview/",
-    target: "_blank",
-    rel: "noopener noreferrer",
-    className: "convening-block pillar-box convening-block--link"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "card-arrow",
-    "aria-hidden": "true"
-  }, "\u2197"), /*#__PURE__*/React.createElement("h3", {
-    style: {
-      fontFamily: "var(--f-sans)",
-      fontSize: "var(--fs-body)",
-      fontWeight: 600,
-      color: "var(--c-red)",
-      margin: "var(--space-025)",
-      lineHeight: "var(--lh-title)"
-    }
-  }, "Research Grants on LLM Civic Discourse"), /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontFamily: "var(--f-sans)",
-      fontSize: "var(--fs-small)",
-      color: "var(--c-dark)",
-      margin: "var(--space-025)",
-      lineHeight: "var(--lh-body)",
-      fontWeight: 300
-    }
-  }, "In 2026, Penn MEDIATED funded four grants to expand Penn's research on this essential topic:"), /*#__PURE__*/React.createElement("ul", {
-    style: {
-      fontFamily: "var(--f-sans)",
-      fontSize: "var(--fs-small)",
-      color: "var(--c-dark)",
-      fontWeight: 300,
-      lineHeight: "var(--lh-body)",
-      paddingLeft: "var(--space-250)",
-      margin: "var(--space-025)",
-      display: "flex",
-      flexDirection: "column",
-      gap: "var(--space-075)"
-    }
-  }, /*#__PURE__*/React.createElement("li", null, "AI Watchman: Longitudinally Auditing Generative AI Content Moderation of Social Issues"), /*#__PURE__*/React.createElement("li", null, "Adversarial Testing of Misalignment in Frontier LLMs: When Asked to Create Anti-Democratic Campaign Materials"), /*#__PURE__*/React.createElement("li", null, "Information Density and Narrative Persuasion in AI Chatbots: Cross-National Evidence from India and the United States"), /*#__PURE__*/React.createElement("li", null, "How AI Transforms News: Measuring Bias and Distortion During LLM Conversations")))))), /*#__PURE__*/React.createElement("div", {
+  const h = React.createElement;
+  const arrow = h("span", { "aria-hidden": "true" }, "\u27F6");
+  return h("div", null,
+    /* Header: title and intro on the left; related Center programming
+       stacked on the right, so the paper grid starts within the first
+       screen. Text is the pre-redesign page's, word for word, plus the
+       Carnegie report card. */
+    h("header", { className: "llm-hero" },
+      h("div", { className: "dashboard-container llm-hero__inner" },
+        h("div", { className: "llm-hero__intro" },
+          h("h1", { className: "page-hero-title llm-hero__title" }, "LLMs and Civic Discourse"),
+          h("p", { className: "llm-hero__lede" }, "Containing ", papers.length, " papers, this dashboard highlights recent research on how large language models (LLMs) shape civic discourse. The collection includes empirical studies examining political bias in LLM outputs, longitudinal audits tracking how LLMs handle political content over time, and experimental research testing how LLMs affect learning outcomes and political beliefs. It also features papers investigating trends in automated content moderation, including refusal patterns and potential speech suppression for different identity groups. Several papers explore whether and how LLMs might support democratic processes\u2014from improving online political conversations to assisting with democratic deliberation. Together, these papers serve as a helpful primer for understanding current research on how LLMs are shaping political communication and civic participation.")),
+        h("aside", { className: "llm-hero__related", "aria-label": "Related Center Programming" },
+          h("p", { className: "llm-eyebrow" }, "Related Center Programming"),
+          h("div", { className: "related-list" },
+            h("article", { className: "related-card" },
+              h("h3", null, "Convening on LLMs and Civic Discourse"),
+              h("p", null, "On March 4th, Penn MEDIATED hosted an online convening of prominent academic researchers and civil society organizations to share results from, and approaches to, monitoring and evaluating LLM civic discourse\u2014how LLMs discuss political topics, refer to politicians, and relate election information. You can see the topic primer for that convening below."),
+              h("a", { href: "LLM Civic Discourse Convening - Topic Primer.pdf", target: "_blank", rel: "noopener noreferrer", className: "link-independent" }, "LLM Civic Discourse \u2013 Topic Primer ", arrow)),
+            h("article", { className: "related-card" },
+              h("h3", null, "Research Grants on LLM Civic Discourse"),
+              h("p", null, "In 2026, Penn MEDIATED funded four grants to expand Penn's research on this essential topic:"),
+              h("button", {
+                type: "button",
+                className: "related-toggle",
+                "aria-expanded": grantsOpen ? "true" : "false",
+                "aria-controls": "llm-grants-list",
+                onClick: () => setGrantsOpen(!grantsOpen)
+              }, h("svg", { width: "13", height: "13", viewBox: "0 0 14 14", fill: "none", "aria-hidden": "true" },
+                  h("path", { d: "M2 5l5 5 5-5", stroke: "currentColor", strokeWidth: "1.8", strokeLinecap: "round", strokeLinejoin: "round" })),
+                grantsOpen ? "Hide the four grants" : "See the four grants"),
+              grantsOpen && h("ul", { id: "llm-grants-list" },
+                h("li", null, "AI Watchman: Longitudinally Auditing Generative AI Content Moderation of Social Issues"),
+                h("li", null, "Adversarial Testing of Misalignment in Frontier LLMs: When Asked to Create Anti-Democratic Campaign Materials"),
+                h("li", null, "Information Density and Narrative Persuasion in AI Chatbots: Cross-National Evidence from India and the United States"),
+                h("li", null, "How AI Transforms News: Measuring Bias and Distortion During LLM Conversations"))),
+            h("article", { className: "related-card" },
+              h("h3", null, "New Report on Monitoring LLMs"),
+              h("p", null, "In a new Carnegie Endowment paper, Alex Engler and Dana\u00E9 Metaxa argue for longitudinal monitoring to understand how LLMs impact politics."),
+              h("a", { href: "https://carnegieendowment.org/research/2026/08/llms-artificial-intelligence-longitudinal-monitoring-norms-politics-research", target: "_blank", rel: "noopener noreferrer", className: "link-independent" }, "Read the report ", h("span", { "aria-hidden": "true" }, "\u2197"))))))),
+    /*#__PURE__*/React.createElement("div", {
     style: {
       background: "var(--c-light-bg)"
     }
@@ -1123,8 +979,8 @@ function Dashboard() {
     style: {
       maxWidth: 1440,
       margin: "0 auto",
-      paddingTop: "var(--space-250)",
-      paddingBottom: "var(--space-200)"
+      paddingTop: "var(--space-200)",
+      paddingBottom: "var(--space-150)"
     }
   }, /*#__PURE__*/React.createElement("div", {
     className: "filter-row",
@@ -1234,7 +1090,7 @@ function Dashboard() {
       e.currentTarget.style.color = "var(--c-dark)";
       e.currentTarget.style.borderColor = "var(--c-border)";
     }
-  }, "Clear filters"), /*#__PURE__*/React.createElement("p", {
+  }, "Clear all \u00D7"), /*#__PURE__*/React.createElement("p", {
     className: "result-count",
     style: {
       fontSize: "var(--fs-micro)",
@@ -1291,212 +1147,42 @@ function Dashboard() {
         whiteSpace: "normal"
       }
     }, tag);
-  }))))), /*#__PURE__*/React.createElement("div", {
-    className: "dashboard-container",
-    style: {
-      maxWidth: 1440,
-      margin: "0 auto",
-      paddingTop: "var(--space-300)",
-      paddingBottom: "var(--space-1000)"
-    }
-  }, filtered.length === 0 && /*#__PURE__*/React.createElement("div", {
-    className: "empty-state",
-    style: {
-      textAlign: "center",
-      padding: "var(--space-1000) var(--space-250)",
-      color: "var(--c-dark)",
-      fontSize: "var(--fs-small)",
-      fontFamily: "var(--f-sans)",
-      background: "var(--c-white)",
-      border: "1px solid var(--c-border)",
-      borderRadius: "var(--radius-card)"
-    }
-  }, /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontSize: "var(--fs-h2)",
-      marginBottom: "var(--space-150)"
-    }
-  }, "\u2205"), "No papers match your current filters."), filtered.length > 0 && /*#__PURE__*/React.createElement("div", {
-    className: "papers-head",
-    "aria-hidden": "true"
-  }, /*#__PURE__*/React.createElement("span", null, "Paper"), /*#__PURE__*/React.createElement("span", null, "Authors"), /*#__PURE__*/React.createElement("span", null, "Year"), /*#__PURE__*/React.createElement("span", null, "Summary")), /*#__PURE__*/React.createElement("div", {
-    className: "papers-list"
-  }, filtered.map((paper, idx) => {
-    const expanded = expandedId === paper.id;
-    return /*#__PURE__*/React.createElement("div", {
-      key: paper.id,
-      className: "paper-row",
-      style: {
-        background: "var(--c-white)",
-        border: "1px solid var(--c-border)",
-        borderRadius: "var(--radius-card)",
-        overflow: "hidden",
-        transition: "box-shadow 0.15s, transform 0.15s"
-      },
-      onMouseEnter: e => {
-        e.currentTarget.style.boxShadow = "0 12px 24px rgba(13,13,12,.16)";
-        e.currentTarget.style.transform = "translateY(-4px)";
-      },
-      onMouseLeave: e => {
-        e.currentTarget.style.boxShadow = "none";
-        e.currentTarget.style.transform = "translateY(0)";
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "paper-row-top",
-      onClick: () => setExpandedId(expanded ? null : paper.id),
-      style: {
-        padding: "var(--space-200) var(--space-250)",
-        cursor: "pointer"
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "paper-row-title",
-      style: {
-        display: "flex",
-        flexDirection: "column",
-        gap: "var(--space-100)",
-        paddingRight: "var(--space-200)"
-      }
-    }, /*#__PURE__*/React.createElement("h2", {
-      style: {
-        fontFamily: "var(--f-serif)",
-        fontSize: "var(--fs-body)",
-        fontWeight: 600,
-        lineHeight: "var(--lh-title)",
-        margin: "var(--space-025)"
-      }
-    }, paper.url ? /*#__PURE__*/React.createElement("a", {
-      href: paper.url,
-      target: "_blank",
-      rel: "noopener noreferrer",
-      onClick: e => e.stopPropagation(),
-      style: {
-        display: "block",
-        color: "var(--c-dark)",
-        textDecoration: "none",
-        transition: "color 0.15s"
-      },
-      onMouseEnter: e => {
-        e.currentTarget.style.color = "var(--c-red-dark)";
-      },
-      onMouseLeave: e => {
-        e.currentTarget.style.color = "var(--c-dark)";
-      }
-    }, paper.title) : /*#__PURE__*/React.createElement("span", {
-      style: {
-        display: "block",
-        color: "var(--c-dark)"
-      }
-    }, paper.title)), /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: "flex",
-        gap: "var(--space-075)",
-        flexWrap: "wrap"
-      }
-    }, paper.tags.filter(tag => tag !== "Penn Research").map(tag => {
-      const s = getTagStyle(tag);
-      return /*#__PURE__*/React.createElement("span", {
-        key: tag,
-        style: {
-          padding: "var(--space-025) var(--space-100)",
-          borderRadius: "var(--radius-control)",
-          background: s.bg,
-          color: s.text,
-          fontSize: "var(--fs-micro)",
-          fontWeight: 500,
-          fontFamily: "var(--f-sans)",
-          border: "1px solid " + s.border,
-          whiteSpace: "nowrap"
-        }
-      }, tag);
-    }))), /*#__PURE__*/React.createElement("div", {
-      className: "paper-row-authors",
-      style: {
-        fontFamily: "var(--f-sans)",
-        fontSize: "var(--fs-small)",
-        color: "var(--c-dark)",
-        lineHeight: "var(--lh-body)",
-        paddingTop: "var(--space-025)"
-      }
-    }, paper.authors, /*#__PURE__*/React.createElement("div", {
-      style: {
-        marginTop: "var(--space-050)",
-        fontFamily: "var(--f-sans)",
-        fontSize: "var(--fs-micro)",
-        textTransform: "uppercase",
-        letterSpacing: "0.5px",
-        color: "var(--c-dark)",
-        overflow: "hidden",
-        textOverflow: "ellipsis",
-        whiteSpace: "nowrap"
-      }
-    }, paper.journal)), /*#__PURE__*/React.createElement("div", {
-      className: "paper-row-year",
-      style: {
-        fontFamily: "var(--f-sans)",
-        fontSize: "var(--fs-small)",
-        color: "var(--c-dark)",
-        paddingTop: "var(--space-025)"
-      }
-    }, paper.year), /*#__PURE__*/React.createElement("div", {
-      className: "paper-row-preview",
-      style: {
-        paddingTop: "var(--space-025)"
-      }
-    }, /*#__PURE__*/React.createElement("p", {
-      style: {
-        margin: "var(--space-025)",
-        fontFamily: "var(--f-sans)",
-        fontSize: "var(--fs-small)",
-        color: "var(--c-dark)",
-        lineHeight: "var(--lh-body)",
-        fontWeight: 300,
-        display: "-webkit-box",
-        WebkitLineClamp: 2,
-        WebkitBoxOrient: "vertical",
-        overflow: "hidden"
-      }
-    }, paper.summary), /*#__PURE__*/React.createElement("span", {
-      style: {
-        marginTop: "var(--space-100)",
-        display: "inline-flex",
-        alignItems: "center",
-        gap: "var(--space-075)",
-        fontFamily: "var(--f-sans)",
-        fontSize: "var(--fs-small)",
-        color: "var(--c-red-dark)"
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "13",
-      height: "13",
-      viewBox: "0 0 14 14",
-      fill: "none",
-      style: {
-        transition: "transform 0.25s",
-        transform: expanded ? "rotate(180deg)" : "rotate(0)",
-        flexShrink: 0
-      }
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M2 5l5 5 5-5",
-      stroke: "var(--c-red-dark)",
-      strokeWidth: "1.8",
-      strokeLinecap: "round",
-      strokeLinejoin: "round"
-    })), expanded ? "Show less" : "Full summary & details"))), expanded && /*#__PURE__*/React.createElement("div", {
-      className: "paper-detail"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "paper-detail__box"
-    }, /*#__PURE__*/React.createElement("h4", null, "Summary"), /*#__PURE__*/React.createElement("p", null, paper.summary)), paper.url && /*#__PURE__*/React.createElement("div", {
-      className: "paper-detail__footer"
-    }, /*#__PURE__*/React.createElement("a", {
-      href: paper.url,
-      target: "_blank",
-      rel: "noopener noreferrer",
-      className: "link-independent",
-      onClick: e => e.stopPropagation()
-    }, "Read paper ", /*#__PURE__*/React.createElement("span", {
-      "aria-hidden": "true"
-    }, "\u27F6")))));
-  }))));
+  }))))), h("div", { className: "dashboard-container llm-grid-wrap" },
+      filtered.length === 0 && h("div", { className: "empty-state" },
+        h("p", { className: "empty-state__mark" }, "\u2205"), "No papers match your current filters."),
+      h("div", { className: "cards-grid" }, filtered.map(paper => {
+        const expanded = expandedId === paper.id;
+        const isPenn = paper.tags.includes("Penn Research");
+        const toggle = () => setExpandedId(expanded ? null : paper.id);
+        return h("article", {
+          key: paper.id,
+          className: "paper-card" + (isPenn ? " is-penn" : "") + (expanded ? " is-expanded" : ""),
+          onClick: toggle
+        },
+          isPenn && h("span", { className: "paper-card__penn" }, "Penn Research"),
+          h("div", { className: "paper-card__meta" },
+            h("span", { className: "paper-card__journal" }, paper.journal),
+            h("span", { className: "paper-card__year" }, paper.year)),
+          h("h2", { className: "paper-card__title" },
+            paper.url
+              ? h("a", { href: paper.url, target: "_blank", rel: "noopener noreferrer", onClick: e => e.stopPropagation() }, paper.title)
+              : h("span", null, paper.title)),
+          h("p", { className: "paper-card__authors" }, paper.authors),
+          h("p", { className: "paper-card__summary" }, paper.summary),
+          h("div", { className: "paper-card__foot" },
+            h("div", { className: "paper-card__tags" }, paper.tags.filter(tag => tag !== "Penn Research").map(tag => {
+              const st = getTagStyle(tag);
+              return h("span", { key: tag, className: "paper-card__tag", style: { background: st.bg, color: st.text, borderColor: st.border } }, tag);
+            })),
+            h("button", {
+              type: "button",
+              className: "paper-card__toggle",
+              "aria-expanded": expanded ? "true" : "false",
+              "aria-label": expanded ? "Show less of this summary" : "Show the full summary",
+              onClick: e => { e.stopPropagation(); toggle(); }
+            }, h("svg", { width: "13", height: "13", viewBox: "0 0 14 14", fill: "none", "aria-hidden": "true" },
+                h("path", { d: "M2 5l5 5 5-5", stroke: "currentColor", strokeWidth: "1.8", strokeLinecap: "round", strokeLinejoin: "round" })))));
+      }))));
 }
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(/*#__PURE__*/React.createElement(Dashboard, null));
