@@ -72,7 +72,7 @@
 
     body {
       font-family: var(--f-serif);
-      background: var(--c-light-bg);
+      background: var(--c-white);   /* matches home .about-center and research-compendium */
       color: var(--c-dark);
       -webkit-font-smoothing: antialiased;
     }
@@ -315,7 +315,10 @@
     /* No bottom padding: the global footer's 132px white signal band is the gap
        before the footer on every page. */
     .llm-grid-wrap { max-width: 1440px; margin: 0 auto; padding-top: var(--space-200); padding-bottom: 0; }
-    .cards-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-200); align-items: start; }
+    /* Default align-items (stretch) on purpose: every card fills its row, so the
+       foot's margin-top:auto has slack to push tags + toggle to the bottom.
+       align-items:start made each card hug its content and defeated that. */
+    .cards-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-200); }
     @media (max-width: 1100px) { .cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
     @media (max-width: 700px)  { .cards-grid { grid-template-columns: minmax(0, 1fr); } }
     .paper-card {
