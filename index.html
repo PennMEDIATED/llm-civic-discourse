@@ -306,9 +306,35 @@
     }
     .related-toggle svg { transition: transform 0.25s; }
     .related-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
-    .related-toggle:hover { text-decoration: underline; text-underline-offset: 3px; }
+    /* Hover fades, matching research-compendium's .entry__toggle — the style
+       guide never uses text-decoration for an underline, and a disclosure
+       carries no underline at all. */
+    .related-toggle:hover { opacity: 0.7; }
+    .related-toggle { transition: opacity 0.15s; }
+
+    /* Category 3 — document button. The topic primer is a PDF, so it is a
+       filled box rather than a text link (same metrics as events'
+       .seminar__pdf-cta, on a light ground: --c-red-dark box, white text).
+       Hover is movement, never a colour change. */
+    .doc-button {
+      display: inline-flex; align-items: center; margin-top: var(--space-075);
+      padding: var(--space-100) var(--space-200);
+      background: var(--c-red-dark); color: var(--c-white); text-decoration: none; border: 0;
+      font-family: var(--f-sans); font-size: var(--fs-small); font-weight: 500; line-height: var(--lh-body);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .doc-button:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(13,13,12,0.22); }
+
+    /* Two-column hero only: drop the aside so the eyebrow's cap height lines up
+       with the title's, not the top of the title's line box. The title is
+       EB Garamond at a fluid --fs-h1, whose capitals sit ~0.247em below its
+       box top; the 12px eyebrow's sit ~5px below its own. Measured live with
+       webfonts loaded at 960 / 1200 / 1440px (offsets 6.6 / 7.7 / 8.8px), so
+       the gap is expressed against --fs-h1 and tracks the clamp. */
+    .llm-hero__related { margin-top: calc(0.247 * var(--fs-h1) - 5px); }
     @media (max-width: 900px) {
       .llm-hero__inner { grid-template-columns: minmax(0, 1fr); gap: var(--space-500); }
+      .llm-hero__related { margin-top: 0; }   /* stacked under the lede: nothing to align to */
     }
 
     /* ── Paper cards: three per row, as on the original page ── */

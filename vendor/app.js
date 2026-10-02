@@ -948,7 +948,7 @@ function Dashboard() {
             h("article", { className: "related-card" },
               h("h3", null, "Convening on LLMs and Civic Discourse"),
               h("p", null, "On March 4th, Penn MEDIATED hosted an online convening of prominent academic researchers and civil society organizations to share results from, and approaches to, monitoring and evaluating LLM civic discourse\u2014how LLMs discuss political topics, refer to politicians, and relate election information. You can see the topic primer for that convening below."),
-              h("a", { href: "LLM Civic Discourse Convening - Topic Primer.pdf", target: "_blank", rel: "noopener noreferrer", className: "link-independent" }, "LLM Civic Discourse \u2013 Topic Primer ", arrow)),
+              h("a", { href: "LLM Civic Discourse Convening - Topic Primer.pdf", target: "_blank", rel: "noopener noreferrer", className: "doc-button" }, "LLM Civic Discourse \u2013 Topic Primer")),
             h("article", { className: "related-card" },
               h("h3", null, "Research Grants on LLM Civic Discourse"),
               h("p", null, "In 2026, Penn MEDIATED funded four grants to expand Penn's research on this essential topic:"),
@@ -969,7 +969,7 @@ function Dashboard() {
             h("article", { className: "related-card" },
               h("h3", null, "New Report on Monitoring LLMs"),
               h("p", null, "In a new Carnegie Endowment paper, Alex Engler and Dana\u00E9 Metaxa argue for longitudinal monitoring to understand how LLMs impact politics."),
-              h("a", { href: "https://carnegieendowment.org/research/2026/08/llms-artificial-intelligence-longitudinal-monitoring-norms-politics-research", target: "_blank", rel: "noopener noreferrer", className: "link-independent" }, "Read the report ", h("span", { "aria-hidden": "true" }, "\u2197"))))))),
+              h("a", { href: "https://carnegieendowment.org/research/2026/08/llms-artificial-intelligence-longitudinal-monitoring-norms-politics-research", target: "_blank", rel: "noopener noreferrer", className: "link-independent" }, "Read the report ", arrow)))))),
     /*#__PURE__*/React.createElement("div", {
     style: {
       background: "var(--c-light-bg)"
