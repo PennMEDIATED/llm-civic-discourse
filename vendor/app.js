@@ -972,14 +972,14 @@ function Dashboard() {
               h("a", { href: "https://carnegieendowment.org/research/2026/08/llms-artificial-intelligence-longitudinal-monitoring-norms-politics-research", target: "_blank", rel: "noopener noreferrer", className: "link-independent" }, "Read the report ", h("span", { "aria-hidden": "true" }, "\u2197"))))))),
     /*#__PURE__*/React.createElement("div", {
     style: {
-      background: "var(--c-white)"
+      background: "var(--c-light-bg)"
     }
   }, /*#__PURE__*/React.createElement("div", {
     className: "dashboard-container",
     style: {
       maxWidth: 1440,
       margin: "0 auto",
-      paddingTop: "var(--space-200)",
+      paddingTop: "var(--space-250)",
       paddingBottom: "var(--space-150)"
     }
   }, /*#__PURE__*/React.createElement("div", {
