@@ -297,6 +297,16 @@
     }
     .related-card ul { padding-left: var(--space-250); display: flex; flex-direction: column; gap: var(--space-025); }
     .related-card .link-independent { margin-top: var(--space-025); }
+    .related-card strong { font-weight: 600; }
+    /* One entry within a multi-item card (the two convenings). */
+    .related-card__item {
+      align-self: stretch;
+      display: flex; flex-direction: column; gap: var(--space-075); align-items: flex-start;
+    }
+    .related-card__item + .related-card__item {
+      border-top: 1px solid var(--c-border);
+      padding-top: var(--space-150); margin-top: var(--space-075);
+    }
     /* "See the four grants": same chevron-and-label toggle as the research
        compendium's "Full summary & details". */
     .related-toggle {
