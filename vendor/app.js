@@ -936,7 +936,7 @@ function Dashboard() {
     /* Header: title and intro on the left; related Center programming
        stacked on the right, so the paper grid starts within the first
        screen. Text is the pre-redesign page's, word for word, plus the
-       Carnegie report card. */
+       September convening recap and Carnegie report cards. */
     h("header", { className: "llm-hero" },
       h("div", { className: "dashboard-container llm-hero__inner" },
         h("div", { className: "llm-hero__intro" },
@@ -945,6 +945,10 @@ function Dashboard() {
         h("aside", { className: "llm-hero__related", "aria-label": "Related Center Programming" },
           h("p", { className: "llm-eyebrow" }, "Related Center Programming"),
           h("div", { className: "related-list" },
+            h("article", { className: "related-card" },
+              h("h3", null, "LLMs Are the Third Wave of Automated Content Moderation"),
+              h("p", null, "On September 10, Penn MEDIATED hosted a second convening on LLMs and civic discourse, bringing together academic researchers, technologists building moderation tools, and civil society advocates to examine how LLMs are reshaping online content moderation."),
+              h("a", { href: "https://mediated.upenn.edu/blog/#llms-third-wave-moderation", target: "_blank", rel: "noopener noreferrer", className: "link-independent" }, "Read the event recap ", arrow)),
             h("article", { className: "related-card" },
               h("h3", null, "Convening on LLMs and Civic Discourse"),
               h("p", null, "On March 4th, Penn MEDIATED hosted an online convening of prominent academic researchers and civil society organizations to share results from, and approaches to, monitoring and evaluating LLM civic discourse\u2014how LLMs discuss political topics, refer to politicians, and relate election information. You can see the topic primer for that convening below."),
