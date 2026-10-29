@@ -740,7 +740,7 @@ const papers = [{
 }, {
   id: 77,
   new: true,
-  authors: "Damião, Í., Almeida, P., Magalhães, P. C., Franco, J., Santos, N., & Gonçalves-Sá, J.",
+  authors: "Damião, Í., Almeida, P., Franco, J., Santos, N., Magalhães, P. C., & Gonçalves-Sá, J.",
   year: 2026,
   title: "Evidence of political bias in search engines and language models before major elections",
   url: "https://arxiv.org/abs/2603.23474",
@@ -847,6 +847,156 @@ const papers = [{
   journal: "NAACL 2024",
   summary: "This study examines whether LLMs can accurately distinguish between the use of hateful speech and its mention–a distinction critical for counterspeech campaigns. Counterspeech that refutes harmful content often mentions toxic language without endorsing it, yet the authors show that recent models fail to make this distinction. The failure propagates to downstream misinformation and hate speech detection tasks, causing models to wrongly censor legitimate counterspeech. To address this, the authors introduce prompting mitigations that teach the use-mention distinction and demonstrate that they reduce such errors",
   tags: ["Content Moderation", "Misinformation & Fact-Checking"]
+}, {
+  id: 88,
+  new: true,
+  authors: "Waight, H., Yang, E., Yuan, Y., Messing, S., Roberts, M. E., Stewart, B. M., & Tucker, J. A.",
+  year: 2026,
+  title: "State media control influences large language models",
+  url: "https://www.nature.com/articles/s41586-026-10506-7",
+  journal: "Nature",
+  summary: "This paper shows that government control of the media shapes what LLMs say, because state-influenced content ends up in their training data. Across six studies, the authors find that LLMs are more pro-government in the languages of countries with less media freedom. In a China case study, they show that state-coordinated media appears in training datasets, that extra pretraining on it makes an open-weight model more positive about Chinese institutions and leaders, and that commercial models respond more favorably when prompted in Chinese than in English.",
+  tags: ["Political Bias & Ideology"]
+}, {
+  id: 89,
+  new: true,
+  authors: "Pagan, N., Barrie, C., Bail, C. A., & Törnberg, P.",
+  year: 2026,
+  title: "Polarization by Default: Auditing Recommendation Bias in LLM-Based Content Curation",
+  url: "https://arxiv.org/abs/2604.15937",
+  journal: "Preprint",
+  summary: "This study tests how LLMs from OpenAI, Anthropic, and Google select and rank social media posts, using 540,000 simulated top-10 selections drawn from X, Bluesky, and Reddit under six different prompting strategies. Polarization was amplified in every configuration and sentiment biases were mostly negative. How toxic content was handled flipped depending on whether the prompt emphasized engagement or information. On Twitter/X, left-leaning authors were over-represented even though right-leaning authors were the plurality in the pool. GPT-4o Mini shows the most consistent behavior across prompts; Claude and Gemini exhibit high adaptivity in toxicity handling; Gemini shows the strongest negative sentiment preference.",
+  tags: ["Political Bias & Ideology", "User Behavior & Information Effects"]
+}, {
+  id: 90,
+  new: true,
+  authors: "Nudo, J., Pandolfo, M. E., Loru, E., Samory, M., Cinelli, M., & Quattrociocchi, W.",
+  year: 2026,
+  title: "Generative exaggeration in LLM social agents: Consistency, bias, and toxicity",
+  url: "https://doi.org/10.1016/j.osnem.2025.100344",
+  journal: "Online Social Networks and Media",
+  summary: "The authors built LLM agents modeled on 1,186 real X users and had them reply to politically charged tweets from the 2024 U.S. presidential election, then compared the replies to those of the humans. Giving the agents more context about each user made them more internally consistent, but it also amplified polarization, stylized language, and harmful language. The authors conclude that LLMs reconstruct users rather than emulate them, which undermines their reliability as stand-ins for real people in moderation, deliberation simulations, and policy modeling.",
+  tags: ["Political Bias & Ideology", "Democracy & Public Deliberation"]
+}, {
+  id: 91,
+  new: true,
+  authors: "Lim, Y. Y., & Röttger, P.",
+  year: 2026,
+  title: "Bias in the East, Bias in the West: A Bilingual Analysis of LLM Political Bias on U.S.- and China-Related Issues",
+  url: "https://aclanthology.org/2026.findings-eacl.122/",
+  journal: "Findings of the Association for Computational Linguistics: EACL 2026",
+  summary: "This study measures political bias in LLMs on U.S.- and China-related issues, using a new parallel dataset of 36,000 prompts covering 60 political issues. It tests how bias changes with prompt language (English or Chinese) and where the model was built (U.S. or China). Both factors matter: language has the larger effect on China-related topics like sovereignty and human rights, while model origin better predicts bias on U.S. governance and foreign policy. The authors argue that bias measurement needs to be language- and context-specific.",
+  tags: ["Political Bias & Ideology", "Benchmarks & Evaluation"]
+}, {
+  id: 92,
+  new: true,
+  authors: "Lin, L., Wang, L., Guo, J., & Wong, K.-F.",
+  year: 2025,
+  title: "Investigating Bias in LLM-Based Bias Detection: Disparities between LLMs and Human Perception",
+  url: "https://aclanthology.org/2025.coling-main.709/",
+  journal: "COLING 2025",
+  summary: "Rather than only asking whether LLMs can detect bias in media content, this paper examines the biases inside the LLMs themselves and how they may affect media bias detection. The authors probe political bias in tasks such as bias prediction and text continuation, across a range of topics and models. They also propose debiasing strategies, including prompt engineering and model fine-tuning.",
+  tags: ["Political Bias & Ideology"]
+}, {
+  id: 93,
+  new: true,
+  authors: "Gunjan, Benabderrahmane, S., & Rahwan, T.",
+  year: 2026,
+  title: "The Algorithmic Caricature: Auditing LLM-Generated Political Discourse Across Crisis Events",
+  url: "https://arxiv.org/abs/2605.12452",
+  journal: "Preprint",
+  summary: "This paper compares real online discourse with LLM-generated discourse across nine crisis events, using a corpus of more than 1.7 million posts, and looks at the population as a whole rather than at individual sentences. Synthetic discourse was more negative, more uniform in sentiment and structure, and more abstract than real discourse, with the largest gaps for fast-moving, decentralized crises. The authors summarize this with a measure they call the “Caricature Gap” and argue that the main weakness of synthetic political text is not fluency but a lack of realism at the population level.",
+  tags: ["Democracy & Public Deliberation", "Misinformation & Fact-Checking"]
+}, {
+  id: 94,
+  new: true,
+  authors: "Majithia, N., Shinde, R., Chapman, Z., Trital, P., Decker, J., Maskey, M., Simperl, E., & Shadbolt, N.",
+  year: 2026,
+  title: "The CitizenQuery Benchmark: A Novel Dataset and Evaluation Pipeline for Measuring LLM Performance in Citizen Query Tasks",
+  url: "https://arxiv.org/abs/2602.04064",
+  journal: "Preprint",
+  summary: "This paper introduces CitizenQuery-UK, a dataset of 22,000 synthetic question-and-answer pairs about UK government policies and services, built from public information on gov.uk. The authors use it to benchmark 11 LLMs on factuality, how often they decline to answer, and how wordy they are. They find that each model family has a distinct but competitive performance profile, but that high variance, rare abstentions, and verbose answers undermine reliability. They argue that trustworthy public-sector AI needs to acknowledge its own fallibility.",
+  tags: ["Benchmarks & Evaluation", "Misinformation & Fact-Checking"]
+}, {
+  id: 95,
+  new: true,
+  authors: "Aldahoul, N., Ibrahim, H., Kaufman, A. R., Rahwan, T., & Zaki, Y.",
+  year: 2026,
+  title: "The Political Ideology of Large Language Models: Measurement, Inconsistency, and Persuasive Influence",
+  url: "https://arxiv.org/abs/2505.04171",
+  journal: "Preprint",
+  summary: "Comparing 43 LLMs to legislators, judges, and U.S. voters, the authors find that models’ apparent moderation comes from strongly partisan positions on specific topics that offset each other, much as with moderate voters. In a pre-registered experiment, voters who discussed a policy issue with an LLM shifted toward the model’s position by 3.5 percentage points on average, but this effect came entirely from cases where the model was prompted to argue one side. Natural conversations showed no detectable persuasive effect.",
+  tags: ["Political Bias & Ideology", "Persuasion & Political Influence"]
+}, {
+  id: 96,
+  new: true,
+  authors: "Proma, A., Pate, N., Druckman, J., Ghoshal, G., & Hoque, E.",
+  year: 2025,
+  title: "Personalizing LLM Responses to Combat Political Misinformation",
+  url: "https://dl.acm.org/doi/full/10.1145/3699682.3728349",
+  journal: "ACM Conference on User Modeling, Adaptation and Personalization (UMAP)",
+  summary: "This paper designs an LLM agent that tailors its responses to a user’s demographics and personality in order to correct misinformed beliefs. The agent grounds its answers in facts through a retrieval-augmented knowledge base and produces varied output depending on the user. A GPT-4o-mini judge rated its responses 3.99 out of 5 for persuasiveness. The authors say the approach could be adapted to other domains.",
+  tags: ["Misinformation & Fact-Checking", "Persuasion & Political Influence"]
+}, {
+  id: 97,
+  new: true,
+  authors: "Münker, S.",
+  year: 2025,
+  title: "Political Bias in LLMs: Unaligned Moral Values in Agent-centric Simulations",
+  url: "https://aclanthology.org/2025.jlcl-2.8/",
+  journal: "Journal for Language Technology and Computational Linguistics",
+  summary: "This study assigns open-source language models different political personas and repeatedly has them complete the Moral Foundations Theory Questionnaire, then compares the synthetic responses to human data from psychological studies. The models’ answers varied widely across repetitions and correlated only weakly with human responses. Conservative personas in particular failed to match real conservative populations. The author concludes that simulating social interactions with LLMs will require better ways of aligning models with the groups they are meant to represent.",
+  tags: ["Political Bias & Ideology"]
+}, {
+  id: 98,
+  new: true,
+  authors: "Löhr, K., Yuan, S., & Färber, M.",
+  year: 2026,
+  title: "The Hidden Bias: A Study on Explicit and Implicit Political Stereotypes in Large Language Models",
+  url: "https://aclanthology.org/2026.findings-eacl.118/",
+  journal: "Findings of the Association for Computational Linguistics: EACL 2026",
+  summary: "The authors use the two-dimensional Political Compass Test to examine political leanings and stereotypes in eight LLMs. They first measure each model’s baseline, then use persona prompts to probe explicit stereotypes, then use multilingual versions of the test to uncover implicit ones. All eight models leaned left, and implicit stereotypes revealed through language variation were more pronounced than explicit ones. For most models, the two kinds of stereotypes were closely aligned.",
+  tags: ["Political Bias & Ideology"]
+}, {
+  id: 99,
+  new: true,
+  authors: "Chen, C., & Shu, K.",
+  year: 2024,
+  title: "Can LLM-Generated Misinformation Be Detected?",
+  url: "https://proceedings.iclr.cc/paper_files/paper/2024/hash/94bbcb744bbada8808fda05b9d9290d6-Abstract-Conference.html",
+  journal: "ICLR 2024",
+  summary: "This paper asks whether LLM-generated misinformation is more harmful than human-written misinformation, approaching the question through how hard it is to detect. The authors build a taxonomy of LLM-generated misinformation and validate realistic ways of producing it. They find that it can be harder for both humans and automated detectors to catch than human-written misinformation with the same meaning, suggesting it may be more deceptive and potentially more harmful.",
+  tags: ["Misinformation & Fact-Checking"]
+}, {
+  id: 100,
+  new: true,
+  authors: "Chen, C., & Shu, K.",
+  year: 2024,
+  title: "Combating misinformation in the age of LLMs: Opportunities and challenges",
+  url: "https://onlinelibrary.wiley.com/doi/full/10.1002/aaai.12188",
+  journal: "AI Magazine",
+  summary: "This survey describes LLMs as a double-edged sword in the fight against misinformation. Their broad knowledge and reasoning ability offer new tools for combating it, but they can also be used to generate deceptive content at scale. The authors review the history of anti-misinformation efforts before LLMs, outline current work on both questions, and call for interdisciplinary collaboration among stakeholders.",
+  tags: ["Misinformation & Fact-Checking"]
+}, {
+  id: 101,
+  new: true,
+  authors: "Chen, K., He, Z., Yan, J., Shi, T., & Lerman, K.",
+  year: 2024,
+  title: "How Susceptible are Large Language Models to Ideological Manipulation?",
+  url: "https://aclanthology.org/2024.emnlp-main.952/",
+  journal: "EMNLP 2024",
+  summary: "This study tests how easily LLMs pick up ideological bias from their instruction-tuning data. The authors find that a small number of ideologically driven training samples is enough to significantly shift a model’s ideology, and that the shift can spread from one topic to unrelated ones. They warn that this makes models vulnerable to deliberately poisoned training data or to biases introduced unintentionally by annotators, and they call for stronger safeguards.",
+  tags: ["Political Bias & Ideology"]
+}, {
+  id: 102,
+  new: true,
+  authors: "Pandey, P. S., Lê, S., Bhardwaj, D., & Jin, Z.",
+  year: 2026,
+  title: "SocialHarmBench: Revealing LLM Vulnerabilities to Socially Harmful Requests",
+  url: "https://proceedings.iclr.cc/paper_files/paper/2026/hash/6ae7649f79c349e234c86b1432385928-Abstract-Conference.html",
+  journal: "ICLR 2026",
+  summary: "The authors argue that existing safety benchmarks rarely test for sociopolitical harms, so they create SocialHarmBench, a dataset of 585 prompts across 7 sociopolitical categories and 34 countries, tied to real-world events. They use it to test open-source models on high-risk areas such as authoritarian surveillance, disinformation campaigns, and the erosion of democratic processes. The results show that existing safeguards do not transfer well to these contexts, exposing partisan biases and weaknesses in protecting human rights and democratic values.",
+  tags: ["Benchmarks & Evaluation", "Democracy & Public Deliberation"]
 }];
 const SORT_OPTIONS = [{
   value: "year-desc",
